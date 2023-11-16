@@ -1,6 +1,8 @@
 package fr.eurecom.mobservapp;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -15,6 +17,7 @@ import fr.eurecom.mobservapp.databinding.ActivityMainBinding;
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
+    private boolean showFinishedPolls = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +35,15 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
+
+        binding.activePollsButton.setChecked(true);
+    }
+
+    public void toggleActiveFinishedPolls(View view) {
+        binding.finishedPollsButton.setChecked(!showFinishedPolls);
+        binding.activePollsButton.setChecked(showFinishedPolls);
+        showFinishedPolls = !showFinishedPolls;
+        Log.i("TEST", "TEST");
     }
 
 }
