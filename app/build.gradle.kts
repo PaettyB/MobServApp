@@ -4,7 +4,7 @@ plugins {
 
 android {
     namespace = "fr.eurecom.mobservapp"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "fr.eurecom.mobservapp"
