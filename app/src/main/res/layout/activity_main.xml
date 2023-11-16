@@ -13,23 +13,25 @@
         android:orientation="horizontal">
 
         <ToggleButton
-            android:id="@+id/toggleButton2"
+            android:id="@+id/active_polls_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:checked="true"
             android:fontFamily="sans-serif"
+            android:onClick="toggleActiveFinishedPolls"
             android:text="ActivePolls"
             android:textAllCaps="false"
             android:textOff="Active Polls"
             android:textOn="Active Polls" />
 
         <ToggleButton
-            android:id="@+id/toggleButton3"
+            android:id="@+id/finishedPollsButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:fontFamily="sans-serif"
+            android:onClick="toggleActiveFinishedPolls"
             android:text="ToggleButton"
             android:textAllCaps="false"
             android:textOff="Finished Polls"
