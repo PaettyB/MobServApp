@@ -1,6 +1,7 @@
 package fr.eurecom.mobservapp.ui.home;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,8 @@ public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding binding;
 
+    private boolean showFinishedPolls = false;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         HomeViewModel homeViewModel =
@@ -23,10 +26,15 @@ public class HomeFragment extends Fragment {
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-
-        final TextView textView = binding.textHome;
-        homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        binding.activePollsButton.setChecked(true);
         return root;
+    }
+
+    public void toggleActiveFinishedPolls(View view) {
+        binding.finishedPollsButton.setChecked(!showFinishedPolls);
+        binding.activePollsButton.setChecked(showFinishedPolls);
+        showFinishedPolls = !showFinishedPolls;
+        Log.i("TEST", "TEST");
     }
 
     @Override

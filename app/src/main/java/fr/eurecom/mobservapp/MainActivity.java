@@ -17,7 +17,7 @@ import fr.eurecom.mobservapp.databinding.ActivityMainBinding;
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
-    private boolean showFinishedPolls = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,14 +36,9 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
 
-        binding.activePollsButton.setChecked(true);
+
     }
 
-    public void toggleActiveFinishedPolls(View view) {
-        binding.finishedPollsButton.setChecked(!showFinishedPolls);
-        binding.activePollsButton.setChecked(showFinishedPolls);
-        showFinishedPolls = !showFinishedPolls;
-        Log.i("TEST", "TEST");
-    }
+
 
 }
