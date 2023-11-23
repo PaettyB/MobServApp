@@ -12,11 +12,15 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import java.util.ArrayList;
+
 import fr.eurecom.mobservapp.databinding.ActivityMainBinding;
+import fr.eurecom.mobservapp.polls.Poll;
 
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
+    private ArrayList<Poll> polls = new ArrayList<Poll>();
 
 
     @Override
@@ -37,6 +41,11 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(binding.navView, navController);
 
 
+    }
+
+    public void addPoll(Poll poll){
+        polls.add(poll);
+        Log.i("ADDED POLL", ""+poll.getTitle());
     }
 
 
