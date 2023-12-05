@@ -12,12 +12,16 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import java.util.ArrayList;
+
 import fr.eurecom.mobservapp.databinding.ActivityMainBinding;
+import fr.eurecom.mobservapp.polls.Poll;
 
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
-    private boolean showFinishedPolls = false;
+    private ArrayList<Poll> polls = new ArrayList<Poll>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,14 +40,14 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
 
-        binding.activePollsButton.setChecked(true);
+
     }
 
-    public void toggleActiveFinishedPolls(View view) {
-        binding.finishedPollsButton.setChecked(!showFinishedPolls);
-        binding.activePollsButton.setChecked(showFinishedPolls);
-        showFinishedPolls = !showFinishedPolls;
-        Log.i("TEST", "TEST");
+    public void addPoll(Poll poll){
+        polls.add(poll);
+        Log.i("ADDED POLL", ""+poll.getTitle());
     }
+
+
 
 }
