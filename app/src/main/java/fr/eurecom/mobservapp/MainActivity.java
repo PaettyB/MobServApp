@@ -13,8 +13,10 @@ import com.google.firebase.database.ValueEventListener;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
@@ -23,6 +25,7 @@ import java.util.Comparator;
 
 import fr.eurecom.mobservapp.databinding.ActivityMainBinding;
 import fr.eurecom.mobservapp.polls.Poll;
+import fr.eurecom.mobservapp.ui.home.HomeFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<Poll> polls = new ArrayList<Poll>();
 
     DatabaseReference myRef;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +55,10 @@ public class MainActivity extends AppCompatActivity {
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://mobservapp-33d11-default-rtdb.europe-west1.firebasedatabase.app/");
         myRef = database.getReference("polls");
 
+        FragmentManager fm = getSupportFragmentManager();
+        NavHostFragment navHostFragment = (NavHostFragment) fm.findFragmentById(R.id.nav_host_fragment_activity_main);
+        HomeFragment homeFragment = (HomeFragment)navHostFragment.getChildFragmentManager().getFragments().get(0);
+
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -61,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
                     polls.add(readPoll);
                 }
                 Log.i("Polls Updated!", "Poll count: " + polls.size());
+                homeFragment.updateRecyclerView();
             }
 
             @Override
@@ -75,6 +84,10 @@ public class MainActivity extends AppCompatActivity {
         String key = myRef.push().getKey();
         myRef.child(key).setValue(poll);
         Log.i("ADDED POLL", ""+poll.getTitle());
+    }
+
+    public ArrayList<Poll> getPolls(){
+        return polls;
     }
 
 

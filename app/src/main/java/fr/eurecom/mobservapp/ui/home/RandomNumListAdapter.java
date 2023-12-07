@@ -1,5 +1,6 @@
 package fr.eurecom.mobservapp.ui.home;
 
+import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,17 +13,28 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import java.util.ArrayList;
+import java.util.MissingFormatArgumentException;
 import java.util.Random;
 
+import fr.eurecom.mobservapp.MainActivity;
 import fr.eurecom.mobservapp.R;
+import fr.eurecom.mobservapp.polls.Poll;
 import fr.eurecom.mobservapp.ui.home.RecyclerViewHolder;
 
 public class RandomNumListAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
     private Random random;
+    private MainActivity mainActivity;
 
-    public RandomNumListAdapter(int seed) {
-        this.random = new Random(seed);
+    private ArrayList<Poll> polls = new ArrayList<Poll>();
+
+
+    public RandomNumListAdapter(Context activity) {
+        this.mainActivity = (MainActivity) activity;
+        polls = mainActivity.getPolls();
     }
+
+
 
     @Override
     public int getItemViewType(final int position) {
@@ -49,11 +61,13 @@ public class RandomNumListAdapter extends RecyclerView.Adapter<RecyclerViewHolde
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewHolder holder, int position) {
         holder.optionsContainer.removeAllViews();
+        Log.i("POLL TITLE", polls.get(position).getTitle());
+        holder.setQuestionText(polls.get(position).getTitle());
 
-        for (int i = 0; i <= position; i++) {
+        for (int i = 0; i <= polls.get(position).getAnswers().size()-1; i++) {
             View pollOptionView = LayoutInflater.from(holder.itemView.getContext()).inflate(R.layout.poll_vote_button_layout, holder.optionsContainer, false);
             Button optionText = pollOptionView.findViewById(R.id.poll_button);
-            optionText.setText("Option number " + String.valueOf(i));
+            optionText.setText(polls.get(position).getAnswers().get(i));
             holder.optionsContainer.addView(pollOptionView);
             // Your code here
         }
@@ -78,6 +92,7 @@ public class RandomNumListAdapter extends RecyclerView.Adapter<RecyclerViewHolde
 
     @Override
     public int getItemCount() {
-        return 100;
+        Log.i("COUNT FUNCTION", String.valueOf(mainActivity.getPolls().size()));
+        return polls.size();
     }
 }

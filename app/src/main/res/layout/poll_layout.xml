@@ -27,7 +27,7 @@
                 android:gravity="center_vertical">
 
                 <TextView
-                    android:id="@+id/textViewInfo"
+                    android:id="@+id/text_username"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -35,20 +35,19 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"/>
 
                 <TextView
-                    android:id="@+id/textViewEnds"
+                    android:id="@+id/text_end_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Ends 6 pm"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:gravity="end"/>
             </LinearLayout>
 
             <TextView
+                android:id="@+id/text_question"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Which movie should I watch tonight?"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:layout_marginBottom="8dp"/>
+                android:layout_marginBottom="8dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
             <LinearLayout
                 android:id="@+id/options_container"
