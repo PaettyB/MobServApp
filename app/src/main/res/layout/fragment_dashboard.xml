@@ -42,7 +42,7 @@
         <ScrollView
             android:id="@+id/scrollView"
             android:layout_width="match_parent"
-            android:layout_height="601dp">
+            android:layout_height="514dp">
 
             <LinearLayout
                 android:id="@+id/answersList"
