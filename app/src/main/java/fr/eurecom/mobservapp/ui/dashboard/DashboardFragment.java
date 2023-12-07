@@ -1,16 +1,12 @@
 package fr.eurecom.mobservapp.ui.dashboard;
 
-import android.app.Activity;
-import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +14,8 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+
+import java.util.ArrayList;
 
 import fr.eurecom.mobservapp.MainActivity;
 import fr.eurecom.mobservapp.databinding.FragmentDashboardBinding;
@@ -39,6 +37,7 @@ public class DashboardFragment extends Fragment {
 
         binding.addAnswersButton.setOnClickListener(this::addAnswer);
         binding.createPollButton.setOnClickListener(this::createPoll);
+        binding.cancelPollCreateButton.setOnClickListener(this::clearFields);
         context = (MainActivity) getContext();
         return root;
     }
@@ -64,16 +63,28 @@ public class DashboardFragment extends Fragment {
         }
     }
 
+    public void clearFields(View view) {
+        binding.answersList.removeViews(2, numAnswers-2);
+        numAnswers = 2;
+        CardView childCard0 = (CardView) binding.answersList.getChildAt(0);
+        ((EditText)((LinearLayout)childCard0.getChildAt(0)).getChildAt(1)).setText("");
+
+        CardView childCard1 = (CardView) binding.answersList.getChildAt(1);
+        ((EditText)((LinearLayout)childCard1.getChildAt(0)).getChildAt(1)).setText("");
+        binding.titleTextField.setText("");
+    }
+
     public void createPoll(View view) {
-        String[] answers = new String[binding.answersList.getChildCount()-1];
-        for(int i = 0; i < answers.length; i++) {
+//        String[] answers = new String[binding.answersList.getChildCount()-1];
+        ArrayList<String> answers= new ArrayList<>();
+        for(int i = 0; i < binding.answersList.getChildCount()-1; i++) {
             CardView childCard = (CardView) binding.answersList.getChildAt(i);
             String answerI = ((EditText)((LinearLayout)childCard.getChildAt(0)).getChildAt(1)).getText().toString();
-            answers[i] = answerI;
+            answers.add(answerI);
         }
         Poll poll = new Poll(binding.titleTextField.getText().toString(), answers, "OWNER");
         context.addPoll(poll);
-        Toast.makeText(context, "Poll added", Toast.LENGTH_SHORT).show();
+        clearFields(view);
     }
 
     @Override
