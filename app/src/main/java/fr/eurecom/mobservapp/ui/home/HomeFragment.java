@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -30,23 +31,26 @@ public class HomeFragment extends Fragment {
                 new ViewModelProvider(this).get(HomeViewModel.class);
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
-        //binding.activePollsButton.setChecked(true);
-
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        View view = binding.getRoot();
         recyclerView = view.findViewById(R.id.recyclerview);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         recyclerView.setAdapter(new RandomNumListAdapter(1234));
+
+
+
+        //Toggle buttons active/finished feeds
+        binding.activePollsButton.setOnClickListener(this::toggleActiveFinishedPolls);
+        binding.finishedPollsButton.setOnClickListener(this::toggleActiveFinishedPolls);
         return view;
     }
 
     public void toggleActiveFinishedPolls(View view) {
-        //binding.finishedPollsButton.setChecked(!showFinishedPolls);
-        //binding.activePollsButton.setChecked(showFinishedPolls);
+        binding.finishedPollsButton.setChecked(!showFinishedPolls);
+        binding.activePollsButton.setChecked(showFinishedPolls);
         showFinishedPolls = !showFinishedPolls;
-        Log.i("TEST", "TEST");
     }
+
 
     @Override
     public void onDestroyView() {

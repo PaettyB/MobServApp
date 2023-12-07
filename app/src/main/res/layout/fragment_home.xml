@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#1FF1A1"
     tools:context=".ui.home.HomeFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -29,7 +30,6 @@
                         android:layout_weight="1"
                         android:checked="true"
                         android:fontFamily="sans-serif"
-                        android:onClick="toggleActiveFinishedPolls"
                         android:text="ActivePolls"
                         android:textAllCaps="false"
                         android:textOff="Active Polls"
@@ -41,7 +41,6 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:fontFamily="sans-serif"
-                        android:onClick="toggleActiveFinishedPolls"
                         android:text="ToggleButton"
                         android:textAllCaps="false"
                         android:textOff="Finished Polls"
