@@ -23,6 +23,8 @@ public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding binding;
 
+
+
     private boolean showFinishedPolls = false;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -35,7 +37,7 @@ public class HomeFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recyclerview);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        recyclerView.setAdapter(new RandomNumListAdapter(1234));
+        recyclerView.setAdapter(new RandomNumListAdapter(getContext()));
 
 
 
@@ -56,5 +58,9 @@ public class HomeFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    public void updateRecyclerView(){
+        recyclerView.getAdapter().notifyDataSetChanged();
     }
 }
