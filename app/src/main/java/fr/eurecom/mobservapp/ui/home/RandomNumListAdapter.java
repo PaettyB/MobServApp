@@ -60,6 +60,7 @@ public class RandomNumListAdapter extends RecyclerView.Adapter<RecyclerViewHolde
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewHolder holder, int position) {
+        position = polls.size()-position-1;
         holder.optionsContainer.removeAllViews();
         Log.i("POLL TITLE", polls.get(position).getTitle());
         holder.setQuestionText(polls.get(position).getTitle());
