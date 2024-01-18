@@ -6,25 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".ui.dashboard.DashboardFragment">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+    <include layout="@layout/new_poll_toolbar" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/black"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:title="Hello">
-
-        <Button
-            android:layout_width="100dp"
-            android:layout_height="50dp"
-            android:text="HELLO BUTTON"
-            android:layout_marginRight="20dp"
-            android:layout_gravity="right">
-
-        </Button>
-    </androidx.appcompat.widget.Toolbar>
+        android:layout_height="match_parent"
+        android:paddingTop="?attr/actionBarSize">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -155,5 +142,6 @@
                 android:text="Create" />
         </LinearLayout>
     </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

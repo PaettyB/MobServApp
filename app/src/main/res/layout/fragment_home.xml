@@ -7,12 +7,17 @@
     android:background="#F3DBFF"
     tools:context=".ui.home.HomeFragment">
 
+
+
+    <include layout="@layout/home_toolbar" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:paddingTop="?attr/actionBarSize">
 
 
-            <LinearLayout
+        <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
