@@ -1,7 +1,14 @@
 package fr.eurecom.mobservapp;
 
+import static androidx.navigation.ui.NavigationUI.setupActionBarWithNavController;
+
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.Window;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DataSnapshot;
@@ -20,12 +27,15 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Objects;
 import java.util.HashMap;
 
 import fr.eurecom.mobservapp.databinding.ActivityMainBinding;
 import fr.eurecom.mobservapp.polls.Poll;
 import fr.eurecom.mobservapp.polls.User;
 import fr.eurecom.mobservapp.ui.home.HomeFragment;
+import fr.eurecom.mobservapp.PrefManager;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,13 +48,17 @@ public class MainActivity extends AppCompatActivity {
 
     public static String USERNAME = "Andrey";
 
+    String currentUser;
 
+
+    @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
@@ -53,8 +67,11 @@ public class MainActivity extends AppCompatActivity {
                 R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+        setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
+        navController.enableOnBackPressed(false);
+
+
 
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://mobservapp-33d11-default-rtdb.europe-west1.firebasedatabase.app/");
         myRef = database.getReference("polls");
@@ -121,6 +138,13 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+//        check if user is logged in
+        if(new PrefManager(this).isUserLogedOut()){
+//          if not, move to log screen
+            navController.navigate(R.id.login_fragment);
+        }
+        Log.i("Main activity user", new PrefManager(this).getUser());
 
         userRef.addValueEventListener(new ValueEventListener() {
             @Override
