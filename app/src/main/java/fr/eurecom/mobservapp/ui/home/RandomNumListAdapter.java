@@ -14,12 +14,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.MissingFormatArgumentException;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 import fr.eurecom.mobservapp.MainActivity;
 import fr.eurecom.mobservapp.R;
 import fr.eurecom.mobservapp.polls.Poll;
+import fr.eurecom.mobservapp.polls.User;
 import fr.eurecom.mobservapp.ui.home.RecyclerViewHolder;
 
 public class RandomNumListAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
@@ -27,11 +30,14 @@ public class RandomNumListAdapter extends RecyclerView.Adapter<RecyclerViewHolde
     private MainActivity mainActivity;
 
     private ArrayList<Poll> polls = new ArrayList<Poll>();
+    private ArrayList<Poll> filtered = new ArrayList<Poll>();
+    private HashMap<String, User> users = new HashMap<>();
 
 
     public RandomNumListAdapter(Context activity) {
         this.mainActivity = (MainActivity) activity;
         polls = mainActivity.getPolls();
+        users = mainActivity.getUsers();
     }
 
 
@@ -60,15 +66,16 @@ public class RandomNumListAdapter extends RecyclerView.Adapter<RecyclerViewHolde
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewHolder holder, int position) {
-        position = polls.size()-position-1;
+        Log.i("POSITION", ""+position);
+        position = filtered.size()-position-1;
         holder.optionsContainer.removeAllViews();
-        Log.i("POLL TITLE", polls.get(position).getTitle());
-        holder.setQuestionText(polls.get(position).getTitle());
+        Log.i("POLL TITLE", filtered.get(position).getTitle());
+        holder.setQuestionText(filtered.get(position).getTitle());
 
-        for (int i = 0; i <= polls.get(position).getAnswers().size()-1; i++) {
+        for (int i = 0; i <= filtered.get(position).getAnswers().size()-1; i++) {
             View pollOptionView = LayoutInflater.from(holder.itemView.getContext()).inflate(R.layout.poll_vote_button_layout, holder.optionsContainer, false);
             Button optionText = pollOptionView.findViewById(R.id.poll_button);
-            optionText.setText(polls.get(position).getAnswers().get(i));
+            optionText.setText(filtered.get(position).getAnswers().get(i));
             holder.optionsContainer.addView(pollOptionView);
             // Your code here
         }
@@ -93,7 +100,14 @@ public class RandomNumListAdapter extends RecyclerView.Adapter<RecyclerViewHolde
 
     @Override
     public int getItemCount() {
-        Log.i("COUNT FUNCTION", String.valueOf(mainActivity.getPolls().size()));
-        return polls.size();
+        filtered = polls.stream().filter(poll -> {
+            // keep if the poll was created by a friend of ours
+            String owner = poll.getOwner();
+            ArrayList<String> ourFriends = users.get(MainActivity.USERNAME).getFriends();
+            return ourFriends.contains(owner);
+        }).collect(Collectors.toCollection(ArrayList::new));
+
+        Log.i("COUNT FUNCTION", filtered.size() + "");
+        return filtered.size();
     }
 }

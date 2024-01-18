@@ -25,21 +25,29 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import fr.eurecom.mobservapp.databinding.ActivityMainBinding;
 import fr.eurecom.mobservapp.polls.Poll;
+import fr.eurecom.mobservapp.polls.User;
 import fr.eurecom.mobservapp.ui.home.HomeFragment;
 
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
     private ArrayList<Poll> polls = new ArrayList<Poll>();
+    private HashMap<String, User> users = new HashMap<>();
 
     DatabaseReference myRef;
+    DatabaseReference userRef;
 
-    public static String USERNAME = "Elvina";
+    public static String USERNAME = "Andrey";
 
 
     @Override
@@ -61,6 +69,8 @@ public class MainActivity extends AppCompatActivity {
 
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://mobservapp-33d11-default-rtdb.europe-west1.firebasedatabase.app/");
         myRef = database.getReference("polls");
+
+        userRef = database.getReference("users");
 
         FragmentManager fm = getSupportFragmentManager();
         NavHostFragment navHostFragment = (NavHostFragment) fm.findFragmentById(R.id.nav_host_fragment_activity_main);
@@ -114,11 +124,41 @@ public class MainActivity extends AppCompatActivity {
                 homeFragment.updateRecyclerView();
             }
 
+
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
         });
+
+        userRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                users.clear();
+
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    User user = snapshot.getValue(User.class);
+                    if(user.getFriends() == null)
+                        user.setFriends(new ArrayList<>());
+                    users.put(user.getName(), user);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+//        User elvina = new User("Ingvild");
+//        elvina.setFriends(new ArrayList<String>(Arrays.asList("Patrick")));
+//        addUser(elvina);
+    }
+
+    public void addUser(User user) {
+        String key = userRef.push().getKey();
+        userRef.child(key).setValue(user);
+        Log.i("ADDED USER", user.getName());
     }
 
 
@@ -133,5 +173,7 @@ public class MainActivity extends AppCompatActivity {
         return polls;
     }
 
-
+    public HashMap<String, User> getUsers() {
+        return users;
+    }
 }
