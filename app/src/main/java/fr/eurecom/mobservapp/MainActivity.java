@@ -46,9 +46,7 @@ public class MainActivity extends AppCompatActivity {
     DatabaseReference myRef;
     DatabaseReference userRef;
 
-    public static String USERNAME = "Andrey";
-
-    String currentUser;
+    public static String USERNAME = "test";
 
 
     @SuppressLint("RestrictedApi")
@@ -71,7 +69,15 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(binding.navView, navController);
         navController.enableOnBackPressed(false);
 
+        //        check if user is logged in
+        if(new PrefManager(this).isUserLogedOut()){
+//          if not, move to log screen
+            navController.navigate(R.id.login_fragment);
+        }
 
+        USERNAME = new PrefManager(this).getUser();
+        Log.i("LOGIN", USERNAME);
+        Log.i("Main activity user", new PrefManager(this).getUser());
 
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://mobservapp-33d11-default-rtdb.europe-west1.firebasedatabase.app/");
         myRef = database.getReference("polls");
@@ -139,12 +145,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-//        check if user is logged in
-        if(new PrefManager(this).isUserLogedOut()){
-//          if not, move to log screen
-            navController.navigate(R.id.login_fragment);
-        }
-        Log.i("Main activity user", new PrefManager(this).getUser());
+
 
         userRef.addValueEventListener(new ValueEventListener() {
             @Override
