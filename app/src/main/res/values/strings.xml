@@ -3,4 +3,8 @@
     <string name="title_home">Friends</string>
     <string name="title_dashboard"></string>
     <string name="title_notifications">Explore</string>
+
+    <string name="title_home_navbar">Polls</string>
+    <string name="title_dashboard_navbar">Create New Poll</string>
+    <string name="title_notifications_navbar">Explore</string>
 </resources>
