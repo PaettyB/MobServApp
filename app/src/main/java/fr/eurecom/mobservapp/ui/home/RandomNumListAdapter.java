@@ -99,8 +99,8 @@ public class RandomNumListAdapter extends RecyclerView.Adapter<RecyclerViewHolde
             }
 
             // keep if the poll was created by a friend of ours or ourselves
-            if(poll.getOwner().equals(MainActivity.USERNAME) || poll.getOwner().equals("test")) return true;
-
+            if(poll.getOwner().equals(MainActivity.USERNAME)) return true;
+            if(!users.containsKey(MainActivity.USERNAME)) return true;
             String owner = poll.getOwner();
             ArrayList<String> ourFriends = users.get(MainActivity.USERNAME).getFriends();
             return ourFriends.contains(owner);

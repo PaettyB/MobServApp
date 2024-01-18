@@ -18,6 +18,7 @@ import androidx.navigation.Navigation;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import fr.eurecom.mobservapp.MainActivity;
 import fr.eurecom.mobservapp.R;
 import fr.eurecom.mobservapp.databinding.LoginFragmentBinding;
 import fr.eurecom.mobservapp.PrefManager;
@@ -57,8 +58,9 @@ public class LoginFragment extends Fragment {
         return view;
     }
 
-    public void logIn(View view){
-        Log.i("Username", usernameTextView.getText().toString());
+    public void logIn(View view) {
+        String username = usernameTextView.getText().toString();
+        Log.i("Username", username);
 //        check if username was entered
         if (!usernameTextView.getText().toString().isEmpty()) {
 //            save username
@@ -72,6 +74,7 @@ public class LoginFragment extends Fragment {
             navView.setVisibility(View.VISIBLE);
 //move to main screen
             NavController navController = Navigation.findNavController(((AppCompatActivity) getActivity()), R.id.nav_host_fragment_activity_main);
+            MainActivity.USERNAME = username;
             navController.navigate(R.id.navigation_home);
         }
     }

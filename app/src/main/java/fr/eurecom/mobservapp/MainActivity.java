@@ -74,9 +74,7 @@ public class MainActivity extends AppCompatActivity {
 //          if not, move to log screen
             navController.navigate(R.id.login_fragment);
         }
-
         USERNAME = new PrefManager(this).getUser();
-        Log.i("LOGIN", USERNAME);
         Log.i("Main activity user", new PrefManager(this).getUser());
 
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://mobservapp-33d11-default-rtdb.europe-west1.firebasedatabase.app/");
