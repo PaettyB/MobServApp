@@ -11,13 +11,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 
 import java.util.ArrayList;
 
 import fr.eurecom.mobservapp.MainActivity;
+import fr.eurecom.mobservapp.R;
 import fr.eurecom.mobservapp.databinding.FragmentDashboardBinding;
 import fr.eurecom.mobservapp.polls.Poll;
 
@@ -85,6 +92,15 @@ public class DashboardFragment extends Fragment {
         Poll poll = new Poll(binding.titleTextField.getText().toString(), answers, "OWNER");
         context.addPoll(poll);
         clearFields(view);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        Toolbar create_new_poll_toolbar = view.findViewById(R.id.create_new_poll_toolbar);
+        NavController navHostFragment = NavHostFragment.findNavController(this);
+        NavigationUI.setupWithNavController(create_new_poll_toolbar, navHostFragment);
     }
 
     @Override

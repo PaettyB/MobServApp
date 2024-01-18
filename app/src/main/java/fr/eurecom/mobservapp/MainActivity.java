@@ -2,7 +2,10 @@ package fr.eurecom.mobservapp;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DataSnapshot;
@@ -13,6 +16,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -38,6 +42,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // hide top toolbar
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.getWindow().setFlags(1024,1024);
+        getSupportActionBar().hide();
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -79,6 +88,30 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    /**
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.toolbar_menu, menu);
+        return true;
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.my_custom_button) {
+            // Handle your button click here
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
+        return NavigationUI.onNavDestinationSelected(item, navController)
+                || super.onOptionsItemSelected(item);
+    }
+     **/
 
     public void addPoll(Poll poll){
         String key = myRef.push().getKey();
