@@ -1,5 +1,6 @@
 package fr.eurecom.mobservapp.ui.home;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -16,6 +17,7 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder {
     LinearLayout optionsContainer;
     private TextView questionView;
     private TextView usernameView;
+    private TextView createdView;
 
     private TextView endTimeView;
     public RecyclerViewHolder(@NonNull View itemView) {
@@ -24,23 +26,28 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder {
         questionView = itemView.findViewById(R.id.text_question);
         usernameView = itemView.findViewById(R.id.text_username);
         endTimeView = itemView.findViewById(R.id.text_end_time);
+        createdView = itemView.findViewById(R.id.text_created_time);
     }
 
 
-
-
-//    private TextView view1;
-//    private TextView view2;
-//    private TextView view3;
-//    public RecyclerViewHolder(@NonNull View itemView) {
-//        super(itemView);
-//
-//
-//    }
-//
     public void setQuestionText(String text) {
         questionView.setText(text);
     }
+
+    public void setUsernameText(String text) {
+        usernameView.setText(text);
+    }
+
+    public void setEndTimeText(String deadline) {
+        endTimeView.setText(deadline);
+    }
+
+    public void setCreatedText(String createdText) {
+        createdView.setText(createdText);
+    }
+
+
+
 //
 //    public void hideView3Text(){
 //        view3.setVisibility(View.GONE);

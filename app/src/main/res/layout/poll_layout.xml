@@ -28,11 +28,18 @@
 
                 <TextView
                     android:id="@+id/text_username"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Elvina • 11:47 am"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Small"/>
+                    android:text="Elvina"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+
+                <TextView
+                    android:id="@+id/text_created_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Today" />
 
                 <TextView
                     android:id="@+id/text_end_time"

@@ -2,12 +2,6 @@ package fr.eurecom.mobservapp;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toolbar;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DataSnapshot;
@@ -25,13 +19,8 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import fr.eurecom.mobservapp.databinding.ActivityMainBinding;
 import fr.eurecom.mobservapp.polls.Poll;
@@ -84,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Poll readPoll = snapshot.getValue(Poll.class);
                     readPoll.setId(snapshot.getKey());
+                    readPoll.setTimeTexts();
 
                     // Check if the user has voted for the poll in question;
                     if (readPoll.getVotes() == null) {

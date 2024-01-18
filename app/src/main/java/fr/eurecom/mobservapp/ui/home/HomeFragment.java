@@ -20,6 +20,7 @@ import fr.eurecom.mobservapp.databinding.FragmentHomeBinding;
 public class HomeFragment extends Fragment {
 
     private RecyclerView recyclerView;
+    private RandomNumListAdapter adapter;
 
     private FragmentHomeBinding binding;
 
@@ -37,7 +38,9 @@ public class HomeFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recyclerview);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        recyclerView.setAdapter(new RandomNumListAdapter(getContext()));
+
+        adapter = new RandomNumListAdapter(getContext());
+        recyclerView.setAdapter(adapter);
 
 
 
@@ -51,6 +54,8 @@ public class HomeFragment extends Fragment {
         binding.finishedPollsButton.setChecked(!showFinishedPolls);
         binding.activePollsButton.setChecked(showFinishedPolls);
         showFinishedPolls = !showFinishedPolls;
+
+        adapter.setDisplayFinishedPolls(showFinishedPolls);
     }
 
 

@@ -1,9 +1,11 @@
 package fr.eurecom.mobservapp.polls;
 
+import com.google.firebase.database.DatabaseException;
 import com.google.firebase.database.Exclude;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Date;
 
 public class Poll {
 
@@ -13,12 +15,17 @@ public class Poll {
     private ArrayList<String> answers;
     private ArrayList<ArrayList<String>> votes;
     private String owner;
-
     private long created;
     private long deadline;
+    private boolean isPublic;
     @Exclude
     private boolean running = true;
-    @Exclude boolean voted = false;
+    @Exclude
+    private boolean voted = false;
+    @Exclude
+    private String remainingText;
+    @Exclude
+    private String createdText;
 
 
 
@@ -35,6 +42,40 @@ public class Poll {
         this.id = "null";
         this.voted = voted;
 
+    }
+
+    public void setTimeTexts() {
+        Date date = new Date(created);
+        SimpleDateFormat format = new SimpleDateFormat("dd.MM.yy HH:mm");
+        createdText = format.format(date);
+
+        if(deadline == -1) {
+            remainingText = "No Deadline";
+            return;
+        }
+        long remainingTime = deadline - System.currentTimeMillis();
+        if(remainingTime < 0) {
+            running = false;
+            remainingText = "Finished";
+            return;
+        }
+        long remainingTimeSeconds = remainingTime / 1000;
+        if(remainingTimeSeconds <= 60) {
+            remainingText = "Ends in " + (remainingTimeSeconds)+" s";
+            return;
+        }
+        int remainingTimeMinutes = (int) (remainingTimeSeconds / 60);
+        if(remainingTimeMinutes <= 60) {
+            remainingText = "Ends in " + (remainingTimeMinutes)+" min";
+            return;
+        }
+        int remainingTimeHours = (int) (remainingTimeMinutes / 60);
+        if(remainingTimeHours <= 24) {
+            remainingText = "Ends in " + (remainingTimeHours)+" h";
+            return;
+        }
+        int remainingTimeDays = (int) (remainingTimeHours / 24);
+        remainingText = "Ends in " + remainingTimeDays + " days";
     }
 
     public Poll() {
@@ -109,7 +150,24 @@ public class Poll {
         return deadline;
     }
 
+    public String getTimeRemainingText() {
+        return remainingText;
+    }
+
+    public String getCreatedText() {
+        return createdText;
+    }
+
     public void setDeadline(long deadline) {
         this.deadline = deadline;
     }
+
+    public boolean isPublic() {
+        return isPublic;
+    }
+
+    public void setPublic(boolean aPublic) {
+        isPublic = aPublic;
+    }
+
 }

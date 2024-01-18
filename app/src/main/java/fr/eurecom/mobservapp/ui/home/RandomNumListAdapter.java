@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.MissingFormatArgumentException;
 import java.util.Random;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import fr.eurecom.mobservapp.MainActivity;
 import fr.eurecom.mobservapp.R;
@@ -32,6 +33,8 @@ public class RandomNumListAdapter extends RecyclerView.Adapter<RecyclerViewHolde
     private ArrayList<Poll> polls = new ArrayList<Poll>();
     private ArrayList<Poll> filtered = new ArrayList<Poll>();
     private HashMap<String, User> users = new HashMap<>();
+
+    private boolean displayFinishedPolls = false;
 
 
     public RandomNumListAdapter(Context activity) {
@@ -68,46 +71,48 @@ public class RandomNumListAdapter extends RecyclerView.Adapter<RecyclerViewHolde
     public void onBindViewHolder(@NonNull RecyclerViewHolder holder, int position) {
         Log.i("POSITION", ""+position);
         position = filtered.size()-position-1;
+        Poll p = filtered.get(position);
         holder.optionsContainer.removeAllViews();
-        Log.i("POLL TITLE", filtered.get(position).getTitle());
-        holder.setQuestionText(filtered.get(position).getTitle());
+        Log.i("POLL TITLE", p.getTitle());
+        holder.setQuestionText(p.getTitle());
+        holder.setCreatedText(p.getCreatedText());
+        holder.setEndTimeText(p.getTimeRemainingText());
+        holder.setUsernameText(p.getOwner());
 
-        for (int i = 0; i <= filtered.get(position).getAnswers().size()-1; i++) {
+        for (int i = 0; i <= p.getAnswers().size()-1; i++) {
             View pollOptionView = LayoutInflater.from(holder.itemView.getContext()).inflate(R.layout.poll_vote_button_layout, holder.optionsContainer, false);
             Button optionText = pollOptionView.findViewById(R.id.poll_button);
-            optionText.setText(filtered.get(position).getAnswers().get(i));
+            optionText.setText(p.getAnswers().get(i));
             holder.optionsContainer.addView(pollOptionView);
-            // Your code here
         }
-
-//        optionsContainer.addView(pollOptionView);
-
-
-
-//        holder.setView1Text(String.valueOf(position));
-
-//
-//        if (position == 2){
-//            holder.hideView3Text();
-//            ViewGroup.LayoutParams params =  holder.itemView.getLayoutParams();
-//            params.height =200;
-//            holder.itemView.setLayoutParams(params);
-//        }
-
-
     }
 
 
     @Override
     public int getItemCount() {
-        filtered = polls.stream().filter(poll -> {
-            // keep if the poll was created by a friend of ours
+        Stream<Poll> s = polls.stream().filter(poll -> {
+            // first filter active / finished polls
+            if(displayFinishedPolls) {
+                if(poll.isRunning()) return false;
+            } else {
+                if(!poll.isRunning()) return false;
+            }
+
+            // keep if the poll was created by a friend of ours or ourselves
+            if(poll.getOwner().equals(MainActivity.USERNAME)) return true;
+
             String owner = poll.getOwner();
             ArrayList<String> ourFriends = users.get(MainActivity.USERNAME).getFriends();
             return ourFriends.contains(owner);
-        }).collect(Collectors.toCollection(ArrayList::new));
+        });
+
+        filtered = s.collect(Collectors.toCollection(ArrayList::new));
 
         Log.i("COUNT FUNCTION", filtered.size() + "");
         return filtered.size();
+    }
+
+    public void setDisplayFinishedPolls(boolean displayFinishedPolls) {
+        this.displayFinishedPolls = displayFinishedPolls;
     }
 }
