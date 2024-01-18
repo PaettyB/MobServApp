@@ -1,20 +1,40 @@
 package fr.eurecom.mobservapp.polls;
 
+import com.google.firebase.database.Exclude;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Poll {
 
+
+    private String id;
     private String title;
     private ArrayList<String> answers;
-    private ArrayList<Integer> votes;
+    private ArrayList<ArrayList<String>> votes;
     private String owner;
-    private boolean running = true;
 
-    public Poll(String title, ArrayList<String> answers, String owner) {
+    private long created;
+    private long deadline;
+    @Exclude
+    private boolean running = true;
+    @Exclude boolean voted = false;
+
+
+
+    public Poll(String title, ArrayList<String> answers, String owner, long created, long deadline, boolean voted) {
         this.title = title;
         this.answers = answers;
         this.owner = owner;
-        this.votes = new ArrayList<>();
+        this.votes = new ArrayList<ArrayList<String>>();
+        for(int i = 0; i < answers.size(); i++) {
+            votes.add(new ArrayList<String>());
+        }
+        this.created = created;
+        this.deadline = deadline;
+        this.id = "null";
+        this.voted = voted;
+
     }
 
     public Poll() {
@@ -37,11 +57,11 @@ public class Poll {
         this.answers = answers;
     }
 
-    public ArrayList<Integer> getVotes() {
+    public ArrayList<ArrayList<String>> getVotes() {
         return votes;
     }
 
-    public void setVotes(ArrayList<Integer> votes) {
+    public void setVotes(ArrayList<ArrayList<String>> votes) {
         this.votes = votes;
     }
 
@@ -59,5 +79,37 @@ public class Poll {
 
     public void setRunning(boolean running) {
         this.running = running;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public long getCreated() {
+        return created;
+    }
+
+    public void setCreated(long created) {
+        this.created = created;
+    }
+
+    public boolean isVoted() {
+        return voted;
+    }
+
+    public void setVoted(boolean voted) {
+        this.voted = voted;
+    }
+
+    public long getDeadline() {
+        return deadline;
+    }
+
+    public void setDeadline(long deadline) {
+        this.deadline = deadline;
     }
 }

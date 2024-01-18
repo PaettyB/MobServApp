@@ -3,6 +3,11 @@ package fr.eurecom.mobservapp;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toolbar;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DataSnapshot;
@@ -34,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
 
     DatabaseReference myRef;
 
+    public static String USERNAME = "Elvina";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
 
         FragmentManager fm = getSupportFragmentManager();
         NavHostFragment navHostFragment = (NavHostFragment) fm.findFragmentById(R.id.nav_host_fragment_activity_main);
-        HomeFragment homeFragment = (HomeFragment)navHostFragment.getChildFragmentManager().getFragments().get(0);
+        HomeFragment homeFragment = (HomeFragment) navHostFragment.getChildFragmentManager().getFragments().get(0);
 
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -66,6 +73,41 @@ public class MainActivity extends AppCompatActivity {
 
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Poll readPoll = snapshot.getValue(Poll.class);
+                    readPoll.setId(snapshot.getKey());
+
+                    // Check if the user has voted for the poll in question;
+                    if (readPoll.getVotes() == null) {
+                        ArrayList<ArrayList<String>> newList = new ArrayList<>();
+                        for(int i = 0; i < readPoll.getAnswers().size(); i++) {
+                            newList.add(new ArrayList<String>());
+                        }
+                        readPoll.setVotes(newList);
+                    }
+                    for (ArrayList<String> votesPerAnswer : readPoll.getVotes())
+                        A:{
+                            if (votesPerAnswer == null) {
+
+                            }
+                            for (String s : votesPerAnswer) {
+                                if (s.equals(USERNAME)) {
+                                    readPoll.setVoted(true);
+                                    break A;
+                                }
+                            }
+                        }
+                    while(readPoll.getVotes().size() < readPoll.getAnswers().size()) {
+                        readPoll.getVotes().add(new ArrayList<>());
+                    }
+
+
+                    // CHECK if the poll is still running
+                    if (readPoll.getDeadline() != -1) {
+                        if (System.nanoTime() > readPoll.getDeadline()) {
+                            // Deadline is over
+                            readPoll.setRunning(false);
+                        }
+                    }
+
                     polls.add(readPoll);
                 }
                 Log.i("Polls Updated!", "Poll count: " + polls.size());
@@ -80,16 +122,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void addPoll(Poll poll){
+    public void addPoll(Poll poll) {
         String key = myRef.push().getKey();
+        poll.setId(key);
         myRef.child(key).setValue(poll);
-        Log.i("ADDED POLL", ""+poll.getTitle());
+        Log.i("ADDED POLL", "" + poll.getTitle());
     }
 
-    public ArrayList<Poll> getPolls(){
+    public ArrayList<Poll> getPolls() {
         return polls;
     }
-
 
 
 }
