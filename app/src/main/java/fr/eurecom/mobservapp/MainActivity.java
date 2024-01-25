@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
     private ArrayList<Poll> polls = new ArrayList<Poll>();
-    private HashMap<String, User> users = new HashMap<>();
+    private static HashMap<String, User> users = new HashMap<>();
 
     DatabaseReference myRef;
     DatabaseReference userRef;
@@ -214,7 +214,7 @@ public class MainActivity extends AppCompatActivity {
         return polls;
     }
 
-    public HashMap<String, User> getUsers() {
+    public static HashMap<String, User> getUsers() {
         return users;
     }
 

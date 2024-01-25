@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F3DBFF"
+    tools:context=".ui.home.FriendsFeedFragment">
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="740dp">
+
+        <include layout="@layout/friends_list_toolbar"
+            android:id="@+id/top_toolbar"/>
+
+        <!-- ScrollView for the friends list -->
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/top_toolbar"
+            android:id="@+id/friends_list_scroll">
+<!--            android:layout_above="@+id/add_friend_button">-->
+
+
+
+            <!-- Layout for the friends list, can be a LinearLayout or other -->
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="vertical">-->
+<!--&lt;!&ndash;                <include layout="@layout/friend_element"&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:id="@+id/top_toolbar"/>&ndash;&gt;-->
+<!--                &lt;!&ndash; Dynamic content (friends list) goes here &ndash;&gt;-->
+<!--            </LinearLayout>-->
+        </ScrollView>
+
+        <!-- Add New Friend Button at the bottom -->
+<!--        <Button-->
+<!--            android:id="@+id/add_friend_button"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_alignParentBottom="true"-->
+<!--            android:text="Add New Friend"-->
+<!--            android:layout_marginBottom="?attr/actionBarSize"-->
+<!--            />-->
+
+    </RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
