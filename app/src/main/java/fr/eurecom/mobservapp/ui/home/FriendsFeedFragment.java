@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -49,7 +50,7 @@ public class FriendsFeedFragment extends Fragment {
         // Inflate the layout for toolbar fragment
         View top_toolbar_view = inflater.inflate(R.layout.fragment_friends_feed, container, false);
         // Find the friends button by ID
-        Button friendsButton = view.findViewById(R.id.friends_button);
+        ImageButton friendsButton = view.findViewById(R.id.friends_button);
 
 
         // Set up a click listener for friends button
