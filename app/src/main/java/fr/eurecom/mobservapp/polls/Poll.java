@@ -53,10 +53,12 @@ public class Poll {
         }
         long remainingTime = deadline - System.currentTimeMillis();
         if(remainingTime < 0) {
+            Log.i("DEADLINE", deadline+"");
             running = false;
             remainingText = "Finished";
             return;
         }
+        running = true;
         long remainingTimeSeconds = remainingTime / 1000;
         if(remainingTimeSeconds <= 60) {
             remainingText = "Ends in " + (remainingTimeSeconds)+" s";

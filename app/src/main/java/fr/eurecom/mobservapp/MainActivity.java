@@ -109,15 +109,13 @@ public class MainActivity extends AppCompatActivity {
                                 }
                             }
                     }
-                    // CHECK if the poll is still running
-                    if (readPoll.getDeadline() != -1) {
-                        if (System.nanoTime() > readPoll.getDeadline()) {
-                            // Deadline is over
-                            readPoll.setRunning(false);
-                        }
-                    }
 
                     polls.add(readPoll);
+                }
+                try {
+                    Thread.sleep(200);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
                 }
                 Log.i("Polls Updated!", "Poll count: " + polls.size());
                 homeFragment.updateRecyclerView();
