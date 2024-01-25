@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/home_toolbar"
+    android:id="@+id/friens_list_toolbar"
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
     android:background="?attr/colorPrimary"
     android:theme="?attr/actionBarTheme"
-    tools:layout="@layout/fragment_friends_feed"
-    tools:context=".ui.home.FriendsFeedFragment">
+    tools:layout="@layout/fragment_friends_list"
+    tools:context=".ui.home.FriendsListFragment">
 
 
     <LinearLayout
@@ -17,7 +17,8 @@
         android:gravity="center_vertical">
 
         <Button
-            android:id="@+id/friends_button"
+            android:id="@+id/back_button"
+            android:text="Back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:icon="@drawable/friends"/>
@@ -27,9 +28,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Polls"
+            android:text="My Friends"
             android:textAppearance="?attr/textAppearanceSubtitle1"
-            android:gravity="left"/>
+            android:gravity="center"/>
+
+        <Button
+            android:id="@+id/search_button"
+            android:text="Add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/friends"/>
+
     </LinearLayout>
 
 </androidx.appcompat.widget.Toolbar>

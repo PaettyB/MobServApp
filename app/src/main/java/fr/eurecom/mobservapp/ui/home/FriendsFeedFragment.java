@@ -4,18 +4,22 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import fr.eurecom.mobservapp.MainActivity;
 import fr.eurecom.mobservapp.R;
 import fr.eurecom.mobservapp.databinding.FragmentFriendsFeedBinding;
 
@@ -42,6 +46,21 @@ public class FriendsFeedFragment extends Fragment {
         adapter = new PollListAdapter(getContext());
         recyclerView.setAdapter(adapter);
 
+        // Inflate the layout for toolbar fragment
+        View top_toolbar_view = inflater.inflate(R.layout.fragment_friends_feed, container, false);
+        // Find the friends button by ID
+        Button friendsButton = view.findViewById(R.id.friends_button);
+
+
+        // Set up a click listener for friends button
+        friendsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavController navController = Navigation.findNavController((AppCompatActivity) getActivity(), R.id.nav_host_fragment_activity_main);
+                navController.navigate(R.id.fragment_friends_list);
+            }
+        });
+
 
 
         //Toggle buttons active/finished feeds
@@ -61,6 +80,7 @@ public class FriendsFeedFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
 
         Toolbar toolbar_home = view.findViewById(R.id.home_toolbar);
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(

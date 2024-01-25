@@ -36,4 +36,9 @@
             android:id="@+id/action_login_fragment_self"
             app:destination="@id/login_fragment" />
     </fragment>
+    <fragment
+        android:id="@+id/fragment_friends_list"
+        android:name="fr.eurecom.mobservapp.ui.home.FriendsListFragment"
+        android:label="Friends"
+        tools:layout="@layout/fragment_friends_list" />
 </navigation>
