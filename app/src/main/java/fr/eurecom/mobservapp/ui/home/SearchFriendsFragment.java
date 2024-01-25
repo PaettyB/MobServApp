@@ -65,7 +65,11 @@ public class SearchFriendsFragment extends Fragment {
                 assert me != null;
                 if(contains(me.getFriends(), username)){
                     Log.i("Friend already exists (search)", username);
-                    Toast.makeText((AppCompatActivity) getActivity(), "Already your friend: "+user.getValue().getName(), Toast.LENGTH_LONG).show();
+                    Toast.makeText((AppCompatActivity) getActivity(), user.getValue().getName()+" is already your friend", Toast.LENGTH_LONG).show();
+                    return;
+                }
+                if(username.equals(MainActivity.USERNAME)){
+                    Toast.makeText((AppCompatActivity) getActivity(), "You are logged in as "+user.getValue().getName(), Toast.LENGTH_LONG).show();
                     return;
                 }
                 me.addFriend(user.getValue().getName());
