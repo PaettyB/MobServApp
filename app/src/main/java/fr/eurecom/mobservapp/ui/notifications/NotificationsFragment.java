@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import fr.eurecom.mobservapp.R;
@@ -40,8 +41,13 @@ public class NotificationsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         Toolbar explore_toolbar = view.findViewById(R.id.explore_toolbar);
+
+        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
+                .build();
+
         NavController navHostFragment = NavHostFragment.findNavController(this);
-        NavigationUI.setupWithNavController(explore_toolbar, navHostFragment);
+        NavigationUI.setupWithNavController(explore_toolbar, navHostFragment, appBarConfiguration);
     }
 
     @Override
