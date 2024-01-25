@@ -184,4 +184,16 @@ public class Poll {
         // Subtract the dummy
         return votes.get(answerIndex).size()-1;
     }
+
+    public int getTotalVotes() {
+        int sum = 0;
+        for(ArrayList<String> a : votes) {
+            sum  += a.size()-1;
+        }
+        return sum;
+    }
+
+    public float getVotePercentage(int answerIndex) {
+        return getVoteCount(answerIndex) / (float) getTotalVotes();
+    }
 }

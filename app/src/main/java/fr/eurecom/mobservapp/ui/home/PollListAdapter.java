@@ -1,11 +1,13 @@
 package fr.eurecom.mobservapp.ui.home;
 
 import android.content.Context;
+import android.os.Build;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -88,8 +90,10 @@ public class PollListAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
                 TextView optText = pollVoteView.findViewById(R.id.optionText);
                 optText.setText(p.getAnswers().get(i));
                 TextView voteCount = pollVoteView.findViewById(R.id.voteCount);
-                voteCount.setText(""+p.getVoteCount(i));
-
+                int percent = (int) (100 * p.getVotePercentage(i));
+                voteCount.setText(p.getVoteCount(i)+"");
+                ProgressBar bar = pollVoteView.findViewById(R.id.progressBar);
+                bar.setProgress(percent);
             }
         } else {
 
@@ -146,7 +150,8 @@ public class PollListAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
                 if(!poll.isRunning()) return false;
             }
 
-            Log.i("UserNAME count", MainActivity.USERNAME);
+            Log.i("UserNAME count", users.size()+"");
+            Log.i("UserNAME", MainActivity.USERNAME);
 
             // keep if the poll was created by a friend of ours or ourselves
             if(!users.containsKey(MainActivity.USERNAME)) return false;
