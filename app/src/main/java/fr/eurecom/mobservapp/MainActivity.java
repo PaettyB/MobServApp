@@ -224,8 +224,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void triggerUpdatePolls(String pollId, Poll poll) {
-        myRef.child(pollId).child("votes").setValue(poll.getVotes());
         homeFragment.updateRecyclerView();
+        myRef.child(pollId).child("votes").setValue(poll.getVotes());
     }
 
 
