@@ -75,6 +75,7 @@ public class LoginFragment extends Fragment {
 //move to main screen
             NavController navController = Navigation.findNavController(((AppCompatActivity) getActivity()), R.id.nav_host_fragment_activity_main);
             MainActivity.USERNAME = username;
+            ((MainActivity)getContext()).setLocalPollProperties();
             navController.navigate(R.id.navigation_home);
         }
     }

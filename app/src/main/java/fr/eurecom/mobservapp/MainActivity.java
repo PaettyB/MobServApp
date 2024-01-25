@@ -40,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
     DatabaseReference myRef;
     DatabaseReference userRef;
 
+    FriendsFeedFragment homeFragment;
+
     public static String USERNAME = "test";
 
 
@@ -83,8 +85,7 @@ public class MainActivity extends AppCompatActivity {
 
         FragmentManager fm = getSupportFragmentManager();
         NavHostFragment navHostFragment = (NavHostFragment) fm.findFragmentById(R.id.nav_host_fragment_activity_main);
-        FriendsFeedFragment homeFragment = (FriendsFeedFragment) navHostFragment.getChildFragmentManager().getFragments().get(0);
-
+        homeFragment = (FriendsFeedFragment) navHostFragment.getChildFragmentManager().getFragments().get(0);
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -94,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
                     Poll readPoll = snapshot.getValue(Poll.class);
                     readPoll.setId(snapshot.getKey());
                     readPoll.setTimeTexts();
-
+                    Log.i("MAIN USERNAME", USERNAME);
                     // Check if the user has voted for the poll in question;
                     if(readPoll.getOwner().equals(USERNAME)) {
                         readPoll.setVoted(true);
@@ -130,7 +131,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-
         userRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -152,6 +152,25 @@ public class MainActivity extends AppCompatActivity {
 //        User elvina = new User("Ingvild");
 //        elvina.setFriends(new ArrayList<String>(Arrays.asList("Patrick")));
 //        addUser(elvina);
+    }
+
+    public void setLocalPollProperties() {
+        for(Poll readPoll : polls) {
+            readPoll.setVoted(false);
+            if(readPoll.getOwner().equals(USERNAME)) {
+                readPoll.setVoted(true);
+            } else {
+                for (ArrayList<String> votesPerAnswer : readPoll.getVotes())
+                    A:{
+                        for (String s : votesPerAnswer) {
+                            if (s.equals(USERNAME)) {
+                                readPoll.setVoted(true);
+                                break A;
+                            }
+                        }
+                    }
+            }
+        }
     }
 
     public void addUser(User user) {
@@ -206,6 +225,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void triggerUpdatePolls(String pollId, Poll poll) {
         myRef.child(pollId).child("votes").setValue(poll.getVotes());
+        homeFragment.updateRecyclerView();
     }
 
 

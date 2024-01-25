@@ -47,9 +47,6 @@ public class PollListAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
 
     @Override
     public int getItemViewType(final int position) {
-//        int p = filtered.size()-position-1;
-//        Poll poll = filtered.get(p);
-//        Log.i("Title at position", position + ", " +poll.getTitle());
         return R.layout.poll_layout;
     }
 
