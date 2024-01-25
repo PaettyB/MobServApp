@@ -46,6 +46,16 @@ public class NotificationsFragment extends Fragment {
                 navController.navigate(R.id.fragment_friends_list);
             }
         });
+
+        ImageButton settingsButton = root.findViewById(R.id.settings_button);
+
+        settingsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavController navController = Navigation.findNavController((AppCompatActivity) getActivity(), R.id.nav_host_fragment_activity_main);
+                navController.navigate(R.id.fragment_settings);
+            }
+        });
         return root;
     }
 

@@ -150,9 +150,6 @@ public class PollListAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
                 if(!poll.isRunning()) return false;
             }
 
-            Log.i("UserNAME count", users.size()+"");
-            Log.i("UserNAME", MainActivity.USERNAME);
-
             // keep if the poll was created by a friend of ours or ourselves
             if(!users.containsKey(MainActivity.USERNAME)) return false;
             if(poll.getOwner().equals(MainActivity.USERNAME)) return true;
@@ -163,7 +160,6 @@ public class PollListAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
 
         filtered = s.collect(Collectors.toCollection(ArrayList::new));
 
-        Log.i("COUNT FUNCTION", filtered.size() + "");
         return filtered.size();
     }
 

@@ -62,6 +62,16 @@ public class FriendsFeedFragment extends Fragment {
             }
         });
 
+        ImageButton settingsButton = view.findViewById(R.id.settings_button);
+
+        settingsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavController navController = Navigation.findNavController((AppCompatActivity) getActivity(), R.id.nav_host_fragment_activity_main);
+                navController.navigate(R.id.fragment_settings);
+            }
+        });
+
 
 
         //Toggle buttons active/finished feeds
@@ -76,6 +86,7 @@ public class FriendsFeedFragment extends Fragment {
         showFinishedPolls = !showFinishedPolls;
 
         adapter.setDisplayFinishedPolls(showFinishedPolls);
+        updateRecyclerView();
     }
 
     @Override

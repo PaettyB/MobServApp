@@ -67,7 +67,7 @@ public class LoginFragment extends Fragment {
             new PrefManager((AppCompatActivity) getActivity()).saveLoginDetails(usernameTextView.getText().toString());
 //            show stuff that was hidden
             try {
-                ((AppCompatActivity) getActivity()).getSupportActionBar().show();
+//                ((AppCompatActivity) getActivity()).getSupportActionBar().show();
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
