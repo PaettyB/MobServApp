@@ -5,7 +5,7 @@
     android:id="@+id/create_new_poll_toolbar"
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
-    android:background="?attr/colorPrimary"
+    android:background="@color/white"
     android:theme="?attr/actionBarTheme"
     tools:layout="@layout/fragment_create_poll"
     tools:context=".ui.dashboard.CreatePollFragment"
@@ -33,7 +33,8 @@
             android:text="Create New Poll"
             android:textAppearance="?attr/textAppearanceSubtitle1"
             android:gravity="center"
-            android:layout_marginRight="50dp"/>
+            android:textColor="@color/dark_green"
+            android:textStyle="bold"/>
     </LinearLayout>
 
 </androidx.appcompat.widget.Toolbar>

@@ -5,45 +5,47 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F3DBFF"
+    android:background="@color/light_green"
     tools:context=".ui.home.FriendsFeedFragment">
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="740dp">
 
-        <include layout="@layout/friends_list_toolbar"
-            android:id="@+id/top_toolbar"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="740dp"
+        android:background="@color/light_green">
+
+        <include
+            android:id="@+id/top_toolbar"
+            layout="@layout/friends_list_toolbar" />
 
         <!-- ScrollView for the friends list -->
         <ScrollView
+            android:id="@+id/friends_list_scroll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/top_toolbar"
-            android:id="@+id/friends_list_scroll">
-<!--            android:layout_above="@+id/add_friend_button">-->
-
+            android:layout_below="@id/top_toolbar">
+            <!--            android:layout_above="@+id/add_friend_button">-->
 
 
             <!-- Layout for the friends list, can be a LinearLayout or other -->
-<!--            <LinearLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:orientation="vertical">-->
-<!--&lt;!&ndash;                <include layout="@layout/friend_element"&ndash;&gt;-->
-<!--&lt;!&ndash;                    android:id="@+id/top_toolbar"/>&ndash;&gt;-->
-<!--                &lt;!&ndash; Dynamic content (friends list) goes here &ndash;&gt;-->
-<!--            </LinearLayout>-->
+            <!--            <LinearLayout-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:orientation="vertical">-->
+            <!--&lt;!&ndash;                <include layout="@layout/friend_element"&ndash;&gt;-->
+            <!--&lt;!&ndash;                    android:id="@+id/top_toolbar"/>&ndash;&gt;-->
+            <!--                &lt;!&ndash; Dynamic content (friends list) goes here &ndash;&gt;-->
+            <!--            </LinearLayout>-->
         </ScrollView>
 
         <!-- Add New Friend Button at the bottom -->
-<!--        <Button-->
-<!--            android:id="@+id/add_friend_button"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_alignParentBottom="true"-->
-<!--            android:text="Add New Friend"-->
-<!--            android:layout_marginBottom="?attr/actionBarSize"-->
-<!--            />-->
+        <!--        <Button-->
+        <!--            android:id="@+id/add_friend_button"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_alignParentBottom="true"-->
+        <!--            android:text="Add New Friend"-->
+        <!--            android:layout_marginBottom="?attr/actionBarSize"-->
+        <!--            />-->
 
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

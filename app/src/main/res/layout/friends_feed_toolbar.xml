@@ -5,7 +5,7 @@
     android:id="@+id/home_toolbar"
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
-    android:background="?attr/colorPrimary"
+    android:background="@color/white"
     android:theme="?attr/actionBarTheme"
     tools:layout="@layout/fragment_friends_feed"
     tools:context=".ui.home.FriendsFeedFragment"
@@ -52,7 +52,9 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="Polls"
-            android:textAppearance="?attr/textAppearanceSubtitle1" />
+            android:textAppearance="?attr/textAppearanceSubtitle1"
+            android:textColor="@color/dark_green"
+            android:textStyle="bold"/>
 
         <RelativeLayout
             android:layout_width="100dp"
