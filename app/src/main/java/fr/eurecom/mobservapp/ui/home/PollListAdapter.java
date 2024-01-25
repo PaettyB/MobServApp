@@ -79,8 +79,31 @@ public class PollListAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
             View pollOptionView = LayoutInflater.from(holder.itemView.getContext()).inflate(R.layout.poll_vote_button_layout, holder.optionsContainer, false);
             Button optionText = pollOptionView.findViewById(R.id.poll_button);
             optionText.setText(p.getAnswers().get(i));
+            // Set a unique tag for each button
+            optionText.setTag(i);
+
+            // Set click listener for the button
+            optionText.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // Handle the button click
+                    int selectedOptionIndex = (int) v.getTag();
+                    // Here you can handle the vote count or any other logic you need
+                    handleVote(p.getId(), selectedOptionIndex);
+                }
+            });
+
+
+
             holder.optionsContainer.addView(pollOptionView);
         }
+    }
+
+    // Method to handle the vote logic
+    private void handleVote(String pollId, int selectedOptionIndex) {
+        // Logic to count the vote for the selected option
+
+
     }
 
 
