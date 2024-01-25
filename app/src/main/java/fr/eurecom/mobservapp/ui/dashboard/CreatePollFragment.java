@@ -17,6 +17,7 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import java.util.ArrayList;
@@ -141,8 +142,11 @@ public class CreatePollFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         Toolbar create_new_poll_toolbar = view.findViewById(R.id.create_new_poll_toolbar);
+        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
+                .build();
         NavController navHostFragment = NavHostFragment.findNavController(this);
-        NavigationUI.setupWithNavController(create_new_poll_toolbar, navHostFragment);
+        NavigationUI.setupWithNavController(create_new_poll_toolbar, navHostFragment, appBarConfiguration);
     }
 
     @Override
