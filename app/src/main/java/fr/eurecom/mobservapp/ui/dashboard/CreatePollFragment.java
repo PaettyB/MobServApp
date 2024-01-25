@@ -85,7 +85,7 @@ public class CreatePollFragment extends Fragment {
             String answerI = ((EditText)((LinearLayout)childCard.getChildAt(0)).getChildAt(1)).getText().toString();
             answers.add(answerI);
         }
-        Poll poll = new Poll(binding.titleTextField.getText().toString(), answers, MainActivity.USERNAME, System.currentTimeMillis(), -1, true);
+        Poll poll = new Poll(binding.titleTextField.getText().toString(), answers, MainActivity.USERNAME, System.currentTimeMillis(), -1, false);
         context.addPoll(poll);
         clearFields(view);
     }
