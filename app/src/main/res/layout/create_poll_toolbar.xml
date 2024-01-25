@@ -1,13 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/create_new_poll_toolbar"
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
     android:background="?attr/colorPrimary"
     android:theme="?attr/actionBarTheme"
     tools:layout="@layout/fragment_create_poll"
-    tools:context=".ui.dashboard.CreatePollFragment">
+    tools:context=".ui.dashboard.CreatePollFragment"
+    android:contentInsetLeft="0dp"
+    android:contentInsetStart="0dp"
+    app:contentInsetLeft="0dp"
+    app:contentInsetStart="0dp"
+    android:contentInsetRight="0dp"
+    android:contentInsetEnd="0dp"
+    app:contentInsetRight="0dp"
+    app:contentInsetEnd="0dp">
 
 
     <LinearLayout
@@ -23,7 +32,8 @@
             android:layout_weight="1"
             android:text="Create New Poll"
             android:textAppearance="?attr/textAppearanceSubtitle1"
-            android:gravity="left"/>
+            android:gravity="center"
+            android:layout_marginRight="50dp"/>
     </LinearLayout>
 
 </androidx.appcompat.widget.Toolbar>

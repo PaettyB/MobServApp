@@ -62,13 +62,13 @@ public class FriendsFeedFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Toolbar toolbar_home = view.findViewById(R.id.home_toolbar);
+        Toolbar friends_feed_toolbar = view.findViewById(R.id.home_toolbar);
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
                 .build();
 
         NavController navHostFragment = NavHostFragment.findNavController(this);
-        NavigationUI.setupWithNavController(toolbar_home, navHostFragment, appBarConfiguration);
+        NavigationUI.setupWithNavController(friends_feed_toolbar, navHostFragment, appBarConfiguration);
     }
 
     @Override
