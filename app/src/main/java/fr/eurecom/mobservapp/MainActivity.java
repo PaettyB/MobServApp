@@ -210,6 +210,7 @@ public class MainActivity extends AppCompatActivity {
         myRef.child(pollId).child("votes").setValue(poll.getVotes());
     }
 
+
     public ArrayList<Poll> getPolls() {
         return polls;
     }

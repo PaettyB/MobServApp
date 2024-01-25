@@ -30,4 +30,8 @@ public class User {
     public void setFriends(ArrayList<String> friends) {
         this.friends = friends;
     }
+
+    public void addFriend(String friend) {
+        this.friends.add(friend);
+    }
 }

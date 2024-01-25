@@ -43,7 +43,7 @@ public class FriendsListFragment extends Fragment {
         LinearLayout linearLayout = new LinearLayout(getContext());
         linearLayout.setOrientation(LinearLayout.VERTICAL);
         
-        // Get the list of friends from MainActivity
+        // Get the users and their friends from MainActivity
         HashMap<String, User> friendsList = MainActivity.getUsers();
 
         
@@ -62,8 +62,10 @@ public class FriendsListFragment extends Fragment {
 
                     // Set the friend details in the friend element layout
                     TextView friendNameTextView = friendLayout.findViewById(R.id.tvUserName);
+                    TextView friendNameUsername = friendLayout.findViewById(R.id.tvUserHandle);
 
                     friendNameTextView.setText(friend);
+                    friendNameUsername.setText("@"+friend);
                     // Add the friend element layout to the scroll view
                     linearLayout.addView(friendLayout);
                 }
@@ -75,6 +77,7 @@ public class FriendsListFragment extends Fragment {
         scrollView.addView(linearLayout);
 
         Button backButton = view.findViewById(R.id.back_button);
+        Button searchButton = view.findViewById(R.id.search_button);
 
 
         // Set up a click listener for friends button
@@ -83,6 +86,14 @@ public class FriendsListFragment extends Fragment {
             public void onClick(View v) {
                 NavController navController = Navigation.findNavController((AppCompatActivity) getActivity(), R.id.nav_host_fragment_activity_main);
                 navController.navigate(R.id.navigation_home);
+            }
+        });
+
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavController navController = Navigation.findNavController((AppCompatActivity) getActivity(), R.id.nav_host_fragment_activity_main);
+                navController.navigate(R.id.fragment_search_friends);
             }
         });
         
