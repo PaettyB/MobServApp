@@ -46,4 +46,9 @@
         android:name="fr.eurecom.mobservapp.ui.home.SearchFriendsFragment"
         android:label="Add New Friend"
         tools:layout="@layout/search_friends_fragment" />
+    <fragment
+        android:id="@+id/fragment_settings"
+        android:name="fr.eurecom.mobservapp.ui.SettingsFragment"
+        android:label="Add New Friend"
+        tools:layout="@layout/fragment_settings" />
 </navigation>
