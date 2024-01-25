@@ -3,13 +3,8 @@ package fr.eurecom.mobservapp;
 import static androidx.navigation.ui.NavigationUI.setupActionBarWithNavController;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
 import android.view.Window;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -21,7 +16,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -30,15 +24,12 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Objects;
 import java.util.HashMap;
 
 import fr.eurecom.mobservapp.databinding.ActivityMainBinding;
 import fr.eurecom.mobservapp.polls.Poll;
 import fr.eurecom.mobservapp.polls.User;
-import fr.eurecom.mobservapp.ui.home.HomeFragment;
-import fr.eurecom.mobservapp.PrefManager;
+import fr.eurecom.mobservapp.ui.home.FriendsFeedFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -92,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
 
         FragmentManager fm = getSupportFragmentManager();
         NavHostFragment navHostFragment = (NavHostFragment) fm.findFragmentById(R.id.nav_host_fragment_activity_main);
-        HomeFragment homeFragment = (HomeFragment) navHostFragment.getChildFragmentManager().getFragments().get(0);
+        FriendsFeedFragment homeFragment = (FriendsFeedFragment) navHostFragment.getChildFragmentManager().getFragments().get(0);
 
         myRef.addValueEventListener(new ValueEventListener() {
             @Override

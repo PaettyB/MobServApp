@@ -6,8 +6,8 @@
     android:layout_height="?attr/actionBarSize"
     android:background="?attr/colorPrimary"
     android:theme="?attr/actionBarTheme"
-    tools:layout="@layout/fragment_home"
-    tools:context=".ui.home.HomeFragment">
+    tools:layout="@layout/fragment_friends_feed"
+    tools:context=".ui.home.FriendsFeedFragment">
 
 
     <LinearLayout

@@ -1,20 +1,14 @@
 package fr.eurecom.mobservapp.ui.home;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -23,14 +17,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import fr.eurecom.mobservapp.R;
-import fr.eurecom.mobservapp.databinding.FragmentHomeBinding;
+import fr.eurecom.mobservapp.databinding.FragmentFriendsFeedBinding;
 
-public class HomeFragment extends Fragment {
+public class FriendsFeedFragment extends Fragment {
 
     private RecyclerView recyclerView;
-    private RandomNumListAdapter adapter;
+    private PollListAdapter adapter;
 
-    private FragmentHomeBinding binding;
+    private FragmentFriendsFeedBinding binding;
 
 
 
@@ -38,16 +32,14 @@ public class HomeFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        HomeViewModel homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
 
-        binding = FragmentHomeBinding.inflate(inflater, container, false);
+        binding = FragmentFriendsFeedBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
         recyclerView = view.findViewById(R.id.recyclerview);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
 
-        adapter = new RandomNumListAdapter(getContext());
+        adapter = new PollListAdapter(getContext());
         recyclerView.setAdapter(adapter);
 
 

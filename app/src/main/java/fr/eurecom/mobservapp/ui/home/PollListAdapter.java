@@ -6,8 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.MissingFormatArgumentException;
 import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -24,9 +21,8 @@ import fr.eurecom.mobservapp.MainActivity;
 import fr.eurecom.mobservapp.R;
 import fr.eurecom.mobservapp.polls.Poll;
 import fr.eurecom.mobservapp.polls.User;
-import fr.eurecom.mobservapp.ui.home.RecyclerViewHolder;
 
-public class RandomNumListAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
+public class PollListAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
     private Random random;
     private MainActivity mainActivity;
 
@@ -37,7 +33,7 @@ public class RandomNumListAdapter extends RecyclerView.Adapter<RecyclerViewHolde
     private boolean displayFinishedPolls = false;
 
 
-    public RandomNumListAdapter(Context activity) {
+    public PollListAdapter(Context activity) {
         this.mainActivity = (MainActivity) activity;
         polls = mainActivity.getPolls();
         users = mainActivity.getUsers();

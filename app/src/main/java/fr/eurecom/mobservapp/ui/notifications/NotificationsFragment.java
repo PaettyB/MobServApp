@@ -16,18 +16,18 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
 import fr.eurecom.mobservapp.R;
-import fr.eurecom.mobservapp.databinding.FragmentNotificationsBinding;
+import fr.eurecom.mobservapp.databinding.FragmentExploreFeedBinding;
 
 public class NotificationsFragment extends Fragment {
 
-    private FragmentNotificationsBinding binding;
+    private FragmentExploreFeedBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         NotificationsViewModel notificationsViewModel =
                 new ViewModelProvider(this).get(NotificationsViewModel.class);
 
-        binding = FragmentNotificationsBinding.inflate(inflater, container, false);
+        binding = FragmentExploreFeedBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         final TextView textView = binding.textNotifications;

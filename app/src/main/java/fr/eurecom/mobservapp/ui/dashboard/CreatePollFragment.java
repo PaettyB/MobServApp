@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,28 +17,25 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
-import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import java.util.ArrayList;
 
 import fr.eurecom.mobservapp.MainActivity;
 import fr.eurecom.mobservapp.R;
-import fr.eurecom.mobservapp.databinding.FragmentDashboardBinding;
+import fr.eurecom.mobservapp.databinding.FragmentCreatePollBinding;
 import fr.eurecom.mobservapp.polls.Poll;
 
-public class DashboardFragment extends Fragment {
+public class CreatePollFragment extends Fragment {
 
-    private FragmentDashboardBinding binding;
+    private FragmentCreatePollBinding binding;
     private int numAnswers = 2;
     private MainActivity context;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        DashboardViewModel dashboardViewModel =
-                new ViewModelProvider(this).get(DashboardViewModel.class);
 
-        binding = FragmentDashboardBinding.inflate(inflater, container, false);
+        binding = FragmentCreatePollBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         binding.addAnswersButton.setOnClickListener(this::addAnswer);

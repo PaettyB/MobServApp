@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="fr.eurecom.mobservapp.ui.home.HomeFragment"
+        android:name="fr.eurecom.mobservapp.ui.home.FriendsFeedFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" >
+        tools:layout="@layout/fragment_friends_feed" >
         <action
             android:id="@+id/action_navigation_home_to_login_fragment"
             app:destination="@id/login_fragment" />
@@ -17,15 +17,15 @@
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="fr.eurecom.mobservapp.ui.dashboard.DashboardFragment"
+        android:name="fr.eurecom.mobservapp.ui.dashboard.CreatePollFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_create_poll" />
 
     <fragment
         android:id="@+id/navigation_notifications"
         android:name="fr.eurecom.mobservapp.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_explore_feed" />
 
     <fragment
         android:id="@+id/login_fragment"

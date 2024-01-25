@@ -6,8 +6,8 @@
     android:layout_height="?attr/actionBarSize"
     android:background="?attr/colorPrimary"
     android:theme="?attr/actionBarTheme"
-    tools:layout="@layout/fragment_dashboard"
-    tools:context=".ui.dashboard.DashboardFragment">
+    tools:layout="@layout/fragment_create_poll"
+    tools:context=".ui.dashboard.CreatePollFragment">
 
 
     <LinearLayout
