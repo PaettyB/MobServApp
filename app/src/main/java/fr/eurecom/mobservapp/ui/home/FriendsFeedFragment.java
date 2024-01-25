@@ -86,6 +86,7 @@ public class FriendsFeedFragment extends Fragment {
         showFinishedPolls = !showFinishedPolls;
 
         adapter.setDisplayFinishedPolls(showFinishedPolls);
+        updateRecyclerView();
     }
 
     @Override
