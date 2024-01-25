@@ -67,14 +67,14 @@ public class CreatePollFragment extends Fragment {
 
     private long msFromPercentage(int p) {
         if (p == 0) return -1;
-        p+=4;
+        p += 4;
         long scaledP = (int) Math.pow(p, 3);
         long msPerWeek = 604800000;
         return (int) (scaledP * Math.pow(msPerWeek, 1 / 3.0));
     }
 
     private String deadlineStringFromMS(long durationMS) {
-        if(durationMS == -1) return "No Deadline";
+        if (durationMS == -1) return "No Deadline";
 
         long remainingTimeSeconds = durationMS / 1000;
         int remainingTimeMinutes = (int) (remainingTimeSeconds / 60);
@@ -130,7 +130,8 @@ public class CreatePollFragment extends Fragment {
             String answerI = ((EditText) ((LinearLayout) childCard.getChildAt(0)).getChildAt(1)).getText().toString();
             answers.add(answerI);
         }
-        Poll poll = new Poll(binding.titleTextField.getText().toString(), answers, MainActivity.USERNAME, System.currentTimeMillis(), System.currentTimeMillis()+deadline, false);
+        long actualDeadline = (deadline == -1) ? -1 : System.currentTimeMillis() + deadline;
+        Poll poll = new Poll(binding.titleTextField.getText().toString(), answers, MainActivity.USERNAME, System.currentTimeMillis(), actualDeadline, false);
         context.addPoll(poll);
         clearFields(view);
     }

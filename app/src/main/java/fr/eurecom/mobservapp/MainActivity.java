@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
                     polls.add(readPoll);
                 }
                 try {
-                    Thread.sleep(80);
+                    Thread.sleep(200);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
