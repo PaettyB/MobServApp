@@ -1,28 +1,30 @@
 package fr.eurecom.mobservapp.ui.home;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import fr.eurecom.mobservapp.R;
-import fr.eurecom.mobservapp.databinding.FragmentHomeBinding;
+import fr.eurecom.mobservapp.databinding.FragmentFriendsFeedBinding;
 
-public class HomeFragment extends Fragment {
+public class FriendsFeedFragment extends Fragment {
 
     private RecyclerView recyclerView;
-    private RandomNumListAdapter adapter;
+    private PollListAdapter adapter;
 
-    private FragmentHomeBinding binding;
+    private FragmentFriendsFeedBinding binding;
 
 
 
@@ -30,16 +32,14 @@ public class HomeFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        HomeViewModel homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
 
-        binding = FragmentHomeBinding.inflate(inflater, container, false);
+        binding = FragmentFriendsFeedBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
         recyclerView = view.findViewById(R.id.recyclerview);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
 
-        adapter = new RandomNumListAdapter(getContext());
+        adapter = new PollListAdapter(getContext());
         recyclerView.setAdapter(adapter);
 
 
@@ -58,6 +58,18 @@ public class HomeFragment extends Fragment {
         adapter.setDisplayFinishedPolls(showFinishedPolls);
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        Toolbar toolbar_home = view.findViewById(R.id.home_toolbar);
+        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
+                .build();
+
+        NavController navHostFragment = NavHostFragment.findNavController(this);
+        NavigationUI.setupWithNavController(toolbar_home, navHostFragment, appBarConfiguration);
+    }
 
     @Override
     public void onDestroyView() {
