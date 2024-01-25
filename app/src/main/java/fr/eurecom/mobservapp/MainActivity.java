@@ -96,30 +96,19 @@ public class MainActivity extends AppCompatActivity {
                     readPoll.setTimeTexts();
 
                     // Check if the user has voted for the poll in question;
-                    if (readPoll.getVotes() == null) {
-                        ArrayList<ArrayList<String>> newList = new ArrayList<>();
-                        for(int i = 0; i < readPoll.getAnswers().size(); i++) {
-                            newList.add(new ArrayList<String>());
-                        }
-                        readPoll.setVotes(newList);
-                    }
-                    for (ArrayList<String> votesPerAnswer : readPoll.getVotes())
-                        A:{
-                            if (votesPerAnswer == null) {
-
-                            }
-                            for (String s : votesPerAnswer) {
-                                if (s.equals(USERNAME)) {
-                                    readPoll.setVoted(true);
-                                    break A;
+                    if(readPoll.getOwner().equals(USERNAME)) {
+                        readPoll.setVoted(true);
+                    } else {
+                        for (ArrayList<String> votesPerAnswer : readPoll.getVotes())
+                            A:{
+                                for (String s : votesPerAnswer) {
+                                    if (s.equals(USERNAME)) {
+                                        readPoll.setVoted(true);
+                                        break A;
+                                    }
                                 }
                             }
-                        }
-                    while(readPoll.getVotes().size() < readPoll.getAnswers().size()) {
-                        readPoll.getVotes().add(new ArrayList<>());
                     }
-
-
                     // CHECK if the poll is still running
                     if (readPoll.getDeadline() != -1) {
                         if (System.nanoTime() > readPoll.getDeadline()) {
@@ -171,7 +160,10 @@ public class MainActivity extends AppCompatActivity {
         String key = userRef.push().getKey();
         userRef.child(key).setValue(user);
         Log.i("ADDED USER", user.getName());
+
     }
+
+
 
     /**
     @Override
@@ -205,6 +197,19 @@ public class MainActivity extends AppCompatActivity {
         Log.i("ADDED POLL", "" + poll.getTitle());
     }
 
+    public Poll getPollById(String id) {
+        for(Poll p : polls) {
+            if(p.getId().equals(id)){
+                return p;
+            }
+        }
+        return null;
+    }
+
+    public void triggerUpdatePolls(String pollId, Poll poll) {
+        myRef.child(pollId).child("votes").setValue(poll.getVotes());
+    }
+
     public ArrayList<Poll> getPolls() {
         return polls;
     }
@@ -212,4 +217,6 @@ public class MainActivity extends AppCompatActivity {
     public HashMap<String, User> getUsers() {
         return users;
     }
+
+
 }

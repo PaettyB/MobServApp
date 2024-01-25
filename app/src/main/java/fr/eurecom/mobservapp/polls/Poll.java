@@ -1,5 +1,7 @@
 package fr.eurecom.mobservapp.polls;
 
+import android.util.Log;
+
 import com.google.firebase.database.DatabaseException;
 import com.google.firebase.database.Exclude;
 
@@ -8,8 +10,6 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Poll {
-
-
     private String id;
     private String title;
     private ArrayList<String> answers;
@@ -18,14 +18,10 @@ public class Poll {
     private long created;
     private long deadline;
     private boolean isPublic;
-    @Exclude
-    private boolean running = true;
-    @Exclude
-    private boolean voted = false;
-    @Exclude
-    private String remainingText;
-    @Exclude
-    private String createdText;
+    @Exclude private boolean running = true;
+    @Exclude private boolean voted = false;
+    @Exclude private String remainingText;
+    @Exclude private String createdText;
 
 
 
@@ -35,7 +31,9 @@ public class Poll {
         this.owner = owner;
         this.votes = new ArrayList<ArrayList<String>>();
         for(int i = 0; i < answers.size(); i++) {
-            votes.add(new ArrayList<String>());
+            ArrayList<String> dummyList = new ArrayList<>();
+            dummyList.add("dummy");
+            votes.add(dummyList);
         }
         this.created = created;
         this.deadline = deadline;
@@ -76,6 +74,17 @@ public class Poll {
         }
         int remainingTimeDays = (int) (remainingTimeHours / 24);
         remainingText = "Ends in " + remainingTimeDays + " days";
+    }
+
+    public boolean vote(String username, int selectedOptionIndex) {
+        if(voted) return false;
+        if(!votes.get(selectedOptionIndex).contains(username)){
+            votes.get(selectedOptionIndex).add(username);
+            voted = true;
+            Log.i("VOTE", "VOTED");
+            return true;
+        }
+        return false;
     }
 
     public Poll() {
@@ -170,4 +179,9 @@ public class Poll {
         isPublic = aPublic;
     }
 
+
+    public int getVoteCount(int answerIndex) {
+        // Subtract the dummy
+        return votes.get(answerIndex).size()-1;
+    }
 }
