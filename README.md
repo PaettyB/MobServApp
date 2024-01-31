@@ -13,10 +13,10 @@ XPoll is an app that connects people through polls, allowing them to share opini
 "Share, Decide, Unite! - Make your voice heard with XPoll."
 
 ## Screenshots
-![XPoll App Screenshot](screenshots/Loading Screen.png)
-![XPoll App Screenshot](screenshots/friends.png)
-![XPoll App Screenshot](screenshots/feed.png)
-![XPoll App Screenshot](screenshots/add poll.png)
+![XPoll App Screenshot](screenshots/Loading_Screen.png) { width: 200px; }
+![XPoll App Screenshot](screenshots/friends.png) { width: 200px; }
+![XPoll App Screenshot](screenshots/feed.png) { width: 200px; }
+![XPoll App Screenshot](screenshots/add_poll.png) { width: 200px; }
 
 ## Permissions Required
 XPoll requires no extra permissions from the user.
