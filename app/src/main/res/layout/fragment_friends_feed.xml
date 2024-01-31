@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_green"
+    tools:context=".ui.home.FriendsFeedFragment">
+
+
+
+    <include layout="@layout/friends_feed_toolbar" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="?attr/actionBarSize">
+
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                tools:ignore="MissingConstraints">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <ToggleButton
+                        android:id="@+id/active_polls_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:checked="true"
+                        android:fontFamily="sans-serif"
+                        android:text="ActivePolls"
+                        android:textAllCaps="false"
+                        android:textOff="Active Polls"
+                        android:textOn="Active Polls" />
+
+                    <ToggleButton
+                        android:id="@+id/finishedPollsButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="sans-serif"
+                        android:text="ToggleButton"
+                        android:textAllCaps="false"
+                        android:textOff="Finished Polls"
+                        android:textOn="Finished Polls" />
+                </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:ignore="MissingConstraints" />
+
+
+
+        <!--        <ScrollView-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="match_parent"-->
+        <!--            android:overScrollMode="never"-->
+        <!--            android:scrollbars="vertical">-->
+
+        <!--            <LinearLayout-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="match_parent"-->
+        <!--                android:orientation="horizontal">-->
+
+        <!--                <androidx.cardview.widget.CardView-->
+        <!--                    android:layout_width="match_parent"-->
+        <!--                    android:layout_height="1in"-->
+        <!--                    android:layout_margin="5dp"-->
+        <!--                    app:cardElevation="5dp"-->
+        <!--                    app:cardCornerRadius="5dp"-->
+        <!--                    app:cardBackgroundColor="@color/white">-->
+
+        <!--                    <ImageView-->
+        <!--                        android:layout_width="1in"-->
+        <!--                        android:layout_height="1in"-->
+        <!--                        android:layout_margin="5dp"-->
+        <!--                        android:elevation="3dp"-->
+        <!--                        android:src="@drawable/cat"-->
+        <!--                        >-->
+
+        <!--                    </ImageView>-->
+
+        <!--                    <TextView-->
+        <!--                        android:layout_width="match_parent"-->
+        <!--                        android:layout_height="match_parent"-->
+        <!--                        android:paddingLeft="1.2in"-->
+        <!--                        android:textSize="23sp"-->
+        <!--                        android:layout_gravity="center"-->
+        <!--                        android:textColor="@color/black"-->
+        <!--                        android:text="Test Text">-->
+
+        <!--                    </TextView>-->
+
+        <!--                </androidx.cardview.widget.CardView>-->
+        <!--                <androidx.cardview.widget.CardView-->
+        <!--                    android:layout_width="match_parent"-->
+        <!--                    android:layout_height="1in"-->
+        <!--                    android:layout_margin="5dp"-->
+        <!--                    app:cardElevation="5dp"-->
+        <!--                    app:cardCornerRadius="5dp"-->
+        <!--                    app:cardBackgroundColor="@color/white">-->
+
+        <!--                    <ImageView-->
+        <!--                        android:layout_width="1in"-->
+        <!--                        android:layout_height="1in"-->
+        <!--                        android:layout_margin="5dp"-->
+        <!--                        android:elevation="3dp"-->
+        <!--                        android:src="@drawable/cat"-->
+        <!--                        >-->
+
+        <!--                    </ImageView>-->
+
+        <!--                    <TextView-->
+        <!--                        android:layout_width="match_parent"-->
+        <!--                        android:layout_height="match_parent"-->
+        <!--                        android:paddingLeft="1.2in"-->
+        <!--                        android:textSize="23sp"-->
+        <!--                        android:layout_gravity="center"-->
+        <!--                        android:textColor="@color/black"-->
+        <!--                        android:text="Test Text">-->
+
+        <!--                    </TextView>-->
+
+        <!--                </androidx.cardview.widget.CardView>-->
+        <!--                <androidx.cardview.widget.CardView-->
+        <!--                    android:layout_width="match_parent"-->
+        <!--                    android:layout_height="1in"-->
+        <!--                    android:layout_margin="5dp"-->
+        <!--                    app:cardElevation="5dp"-->
+        <!--                    app:cardCornerRadius="5dp"-->
+        <!--                    app:cardBackgroundColor="@color/white">-->
+
+        <!--                    <ImageView-->
+        <!--                        android:layout_width="1in"-->
+        <!--                        android:layout_height="1in"-->
+        <!--                        android:layout_margin="5dp"-->
+        <!--                        android:elevation="3dp"-->
+        <!--                        android:src="@drawable/cat"-->
+        <!--                        >-->
+
+        <!--                    </ImageView>-->
+
+        <!--                    <TextView-->
+        <!--                        android:layout_width="match_parent"-->
+        <!--                        android:layout_height="match_parent"-->
+        <!--                        android:paddingLeft="1.2in"-->
+        <!--                        android:textSize="23sp"-->
+        <!--                        android:layout_gravity="center"-->
+        <!--                        android:textColor="@color/black"-->
+        <!--                        android:text="Test Text">-->
+
+        <!--                    </TextView>-->
+
+        <!--                </androidx.cardview.widget.CardView>-->
+        <!--                <androidx.cardview.widget.CardView-->
+        <!--                    android:layout_width="match_parent"-->
+        <!--                    android:layout_height="1in"-->
+        <!--                    android:layout_margin="5dp"-->
+        <!--                    app:cardElevation="5dp"-->
+        <!--                    app:cardCornerRadius="5dp"-->
+        <!--                    app:cardBackgroundColor="@color/white">-->
+
+        <!--                    <ImageView-->
+        <!--                        android:layout_width="1in"-->
+        <!--                        android:layout_height="1in"-->
+        <!--                        android:layout_margin="5dp"-->
+        <!--                        android:elevation="3dp"-->
+        <!--                        android:src="@drawable/cat"-->
+        <!--                        >-->
+
+        <!--                    </ImageView>-->
+
+        <!--                    <TextView-->
+        <!--                        android:layout_width="match_parent"-->
+        <!--                        android:layout_height="match_parent"-->
+        <!--                        android:paddingLeft="1.2in"-->
+        <!--                        android:textSize="23sp"-->
+        <!--                        android:layout_gravity="center"-->
+        <!--                        android:textColor="@color/black"-->
+        <!--                        android:text="Test Text">-->
+
+        <!--                    </TextView>-->
+
+        <!--                </androidx.cardview.widget.CardView>-->
+        <!--                <androidx.cardview.widget.CardView-->
+        <!--                    android:layout_width="match_parent"-->
+        <!--                    android:layout_height="1in"-->
+        <!--                    android:layout_margin="5dp"-->
+        <!--                    app:cardElevation="5dp"-->
+        <!--                    app:cardCornerRadius="5dp"-->
+        <!--                    app:cardBackgroundColor="@color/white">-->
+
+        <!--                    <ImageView-->
+        <!--                        android:layout_width="1in"-->
+        <!--                        android:layout_height="1in"-->
+        <!--                        android:layout_margin="5dp"-->
+        <!--                        android:elevation="3dp"-->
+        <!--                        android:src="@drawable/cat"-->
+        <!--                        >-->
+
+        <!--                    </ImageView>-->
+
+        <!--                    <TextView-->
+        <!--                        android:layout_width="match_parent"-->
+        <!--                        android:layout_height="match_parent"-->
+        <!--                        android:paddingLeft="1.2in"-->
+        <!--                        android:textSize="23sp"-->
+        <!--                        android:layout_gravity="center"-->
+        <!--                        android:textColor="@color/black"-->
+        <!--                        android:text="Test Text">-->
+
+        <!--                    </TextView>-->
+
+        <!--                </androidx.cardview.widget.CardView>-->
+        <!--                <androidx.cardview.widget.CardView-->
+        <!--                    android:layout_width="match_parent"-->
+        <!--                    android:layout_height="1in"-->
+        <!--                    android:layout_margin="5dp"-->
+        <!--                    app:cardElevation="5dp"-->
+        <!--                    app:cardCornerRadius="5dp"-->
+        <!--                    app:cardBackgroundColor="@color/white">-->
+
+        <!--                    <ImageView-->
+        <!--                        android:layout_width="1in"-->
+        <!--                        android:layout_height="1in"-->
+        <!--                        android:layout_margin="5dp"-->
+        <!--                        android:elevation="3dp"-->
+        <!--                        android:src="@drawable/cat"-->
+        <!--                        >-->
+
+        <!--                    </ImageView>-->
+
+        <!--                    <TextView-->
+        <!--                        android:layout_width="match_parent"-->
+        <!--                        android:layout_height="match_parent"-->
+        <!--                        android:paddingLeft="1.2in"-->
+        <!--                        android:textSize="23sp"-->
+        <!--                        android:layout_gravity="center"-->
+        <!--                        android:textColor="@color/black"-->
+        <!--                        android:text="Test Text">-->
+
+        <!--                    </TextView>-->
+
+        <!--                </androidx.cardview.widget.CardView>-->
+        <!--                <androidx.cardview.widget.CardView-->
+        <!--                    android:layout_width="match_parent"-->
+        <!--                    android:layout_height="1in"-->
+        <!--                    android:layout_margin="5dp"-->
+        <!--                    app:cardElevation="5dp"-->
+        <!--                    app:cardCornerRadius="5dp"-->
+        <!--                    app:cardBackgroundColor="@color/white">-->
+
+        <!--                    <ImageView-->
+        <!--                        android:layout_width="1in"-->
+        <!--                        android:layout_height="1in"-->
+        <!--                        android:layout_margin="5dp"-->
+        <!--                        android:elevation="3dp"-->
+        <!--                        android:src="@drawable/cat"-->
+        <!--                        >-->
+
+        <!--                    </ImageView>-->
+
+        <!--                    <TextView-->
+        <!--                        android:layout_width="match_parent"-->
+        <!--                        android:layout_height="match_parent"-->
+        <!--                        android:paddingLeft="1.2in"-->
+        <!--                        android:textSize="23sp"-->
+        <!--                        android:layout_gravity="center"-->
+        <!--                        android:textColor="@color/black"-->
+        <!--                        android:text="Test Text">-->
+
+        <!--                    </TextView>-->
+
+        <!--                </androidx.cardview.widget.CardView>-->
+        <!--            </LinearLayout>-->
+
+
+        <!--        </ScrollView>-->
+            </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+

@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">MobServApp</string>
+    <string name="title_home">Friends</string>
+    <string name="title_dashboard"></string>
+    <string name="title_notifications">Explore</string>
+    <string name="log_in">Log in</string>
+</resources>

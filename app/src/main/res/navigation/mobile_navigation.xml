@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="fr.eurecom.mobservapp.ui.home.FriendsFeedFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_friends_feed" >
+        <action
+            android:id="@+id/action_navigation_home_to_login_fragment"
+            app:destination="@id/login_fragment" />
+        <action
+            android:id="@+id/action_navigation_home_to_fragment_settings"
+            app:destination="@id/fragment_settings"
+            />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_dashboard"
+        android:name="fr.eurecom.mobservapp.ui.dashboard.CreatePollFragment"
+        android:label="@string/title_dashboard"
+        tools:layout="@layout/fragment_create_poll" />
+
+    <fragment
+        android:id="@+id/navigation_notifications"
+        android:name="fr.eurecom.mobservapp.ui.notifications.NotificationsFragment"
+        android:label="@string/title_notifications"
+        tools:layout="@layout/fragment_explore_feed" />
+
+    <fragment
+        android:id="@+id/login_fragment"
+        android:name="fr.eurecom.mobservapp.ui.LoginFragment"
+        android:label="login_fragment"
+        tools:layout="@layout/login_fragment">
+        <action
+            android:id="@+id/action_login_fragment_self"
+            app:destination="@id/login_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_friends_list"
+        android:name="fr.eurecom.mobservapp.ui.home.FriendsListFragment"
+        android:label="Friends"
+        tools:layout="@layout/fragment_friends_list" />
+    <fragment
+        android:id="@+id/fragment_search_friends"
+        android:name="fr.eurecom.mobservapp.ui.home.SearchFriendsFragment"
+        android:label="Add New Friend"
+        tools:layout="@layout/search_friends_fragment" />
+    <fragment
+        android:id="@+id/fragment_settings"
+        android:name="fr.eurecom.mobservapp.ui.SettingsFragment"
+        android:label="Add New Friend"
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_fragment_settings_to_navigation_home"
+            app:destination="@id/navigation_home"
+            app:popUpTo="@+id/navigation_home"
+            />
+    </fragment>
+</navigation>
