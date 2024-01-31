@@ -16,6 +16,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import fr.eurecom.mobservapp.MainActivity;
+import fr.eurecom.mobservapp.PrefManager;
 import fr.eurecom.mobservapp.R;
 import fr.eurecom.mobservapp.databinding.FragmentExploreFeedBinding;
 import fr.eurecom.mobservapp.databinding.FragmentSettingsBinding;
@@ -40,16 +41,20 @@ public class SettingsFragment extends Fragment {
         doneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NavController navController = Navigation.findNavController((AppCompatActivity) getActivity(), R.id.nav_host_fragment_activity_main);
-                navController.navigate(R.id.navigation_home);
+//                NavController navController = Navigation.findNavController((AppCompatActivity) getActivity(), R.id.nav_host_fragment_activity_main);
+//                navController.navigate(R.id.navigation_home);
+                ((MainActivity)getContext()).getMainNavController().navigate(R.id.action_fragment_settings_to_navigation_home );
             }
         });
 
         signOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NavController navController = Navigation.findNavController((AppCompatActivity) getActivity(), R.id.nav_host_fragment_activity_main);
-                navController.navigate(R.id.login_fragment);
+                MainActivity.USERNAME = "";
+                new PrefManager((AppCompatActivity) getActivity()).saveLoginDetails("");
+//                NavController navController = Navigation.findNavController((AppCompatActivity) getActivity(), R.id.nav_host_fragment_activity_main);
+//                navController.navigate(R.id.login_fragment);
+                ((MainActivity)getContext()).getMainNavController().navigate(R.id.login_fragment);
             }
         });
         return view;

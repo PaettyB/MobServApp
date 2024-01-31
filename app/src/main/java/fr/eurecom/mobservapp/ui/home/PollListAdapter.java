@@ -155,6 +155,11 @@ public class PollListAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
             return ourFriends.contains(owner);
         });
 
+//        Stream<Poll> sorted = s.sorted((a,b) -> {
+//            if (a.isVoted() && b)
+//            return Math.toIntExact(a.getDeadline() - b.getDeadline());
+//        });
+
         filtered = s.collect(Collectors.toCollection(ArrayList::new));
 
         return filtered.size();

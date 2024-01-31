@@ -44,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
 
     public static String USERNAME = "test";
 
+    NavController mainNavController;
+
 
     @SuppressLint("RestrictedApi")
     @Override
@@ -65,15 +67,15 @@ public class MainActivity extends AppCompatActivity {
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
                 .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
-        setupActionBarWithNavController(this, navController, appBarConfiguration);
-        NavigationUI.setupWithNavController(binding.navView, navController);
-        navController.enableOnBackPressed(false);
+        mainNavController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
+        setupActionBarWithNavController(this, mainNavController, appBarConfiguration);
+        NavigationUI.setupWithNavController(binding.navView, mainNavController);
+        mainNavController.enableOnBackPressed(false);
 
         //        check if user is logged in
         if(new PrefManager(this).isUserLogedOut()){
 //          if not, move to log screen
-            navController.navigate(R.id.login_fragment);
+            mainNavController.navigate(R.id.login_fragment);
         }
         USERNAME = new PrefManager(this).getUser();
         Log.i("Main activity user", new PrefManager(this).getUser());
@@ -83,9 +85,9 @@ public class MainActivity extends AppCompatActivity {
 
         userRef = database.getReference("users");
 
-        FragmentManager fm = getSupportFragmentManager();
-        NavHostFragment navHostFragment = (NavHostFragment) fm.findFragmentById(R.id.nav_host_fragment_activity_main);
-        homeFragment = (FriendsFeedFragment) navHostFragment.getChildFragmentManager().getFragments().get(0);
+//        FragmentManager fm = getSupportFragmentManager();
+//        NavHostFragment navHostFragment = (NavHostFragment) fm.findFragmentById(R.id.nav_host_fragment_activity_main);
+//        homeFragment = (FriendsFeedFragment) navHostFragment.getChildFragmentManager().getFragments().get(0);
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -113,13 +115,21 @@ public class MainActivity extends AppCompatActivity {
 
                     polls.add(readPoll);
                 }
-                try {
-                    Thread.sleep(200);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
+//                try {
+//                    Thread.sleep(200);
+//                } catch (InterruptedException e) {
+//                    throw new RuntimeException(e);
+//                }
+
+                FragmentManager fm = getSupportFragmentManager();
+                NavHostFragment navHostFragment = (NavHostFragment) fm.findFragmentById(R.id.nav_host_fragment_activity_main);
+                if((navHostFragment.getChildFragmentManager().getFragments().get(0) instanceof FriendsFeedFragment)) {
+                    homeFragment = (FriendsFeedFragment) navHostFragment.getChildFragmentManager().getFragments().get(0);
+
+                    Log.i("Polls Updated!", "Poll count: " + polls.size());
+                    Log.i("Fragments" , ""+ navHostFragment.getChildFragmentManager().getFragments().size());
+                    homeFragment.updateRecyclerView();
                 }
-                Log.i("Polls Updated!", "Poll count: " + polls.size());
-                homeFragment.updateRecyclerView();
             }
 
 
@@ -237,5 +247,7 @@ public class MainActivity extends AppCompatActivity {
         return users;
     }
 
-
+    public NavController getMainNavController() {
+        return mainNavController;
+    }
 }

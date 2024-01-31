@@ -13,6 +13,10 @@
         <action
             android:id="@+id/action_navigation_home_to_login_fragment"
             app:destination="@id/login_fragment" />
+        <action
+            android:id="@+id/action_navigation_home_to_fragment_settings"
+            app:destination="@id/fragment_settings"
+            />
     </fragment>
 
     <fragment
@@ -50,5 +54,11 @@
         android:id="@+id/fragment_settings"
         android:name="fr.eurecom.mobservapp.ui.SettingsFragment"
         android:label="Add New Friend"
-        tools:layout="@layout/fragment_settings" />
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_fragment_settings_to_navigation_home"
+            app:destination="@id/navigation_home"
+            app:popUpTo="@+id/navigation_home"
+            />
+    </fragment>
 </navigation>

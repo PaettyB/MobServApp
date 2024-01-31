@@ -57,8 +57,8 @@ public class FriendsFeedFragment extends Fragment {
         friendsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NavController navController = Navigation.findNavController((AppCompatActivity) getActivity(), R.id.nav_host_fragment_activity_main);
-                navController.navigate(R.id.fragment_friends_list);
+//                NavController navController = Navigation.findNavController((AppCompatActivity) getActivity(), R.id.nav_host_fragment_activity_main);
+                ((MainActivity)getContext()).getMainNavController().navigate(R.id.fragment_friends_list);
             }
         });
 
@@ -67,8 +67,8 @@ public class FriendsFeedFragment extends Fragment {
         settingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NavController navController = Navigation.findNavController((AppCompatActivity) getActivity(), R.id.nav_host_fragment_activity_main);
-                navController.navigate(R.id.fragment_settings);
+//                NavController navController = Navigation.findNavController((AppCompatActivity) getActivity(), R.id.nav_host_fragment_activity_main);
+                ((MainActivity)getContext()).getMainNavController().navigate(R.id.action_navigation_home_to_fragment_settings);
             }
         });
 
@@ -89,18 +89,6 @@ public class FriendsFeedFragment extends Fragment {
         updateRecyclerView();
     }
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        Toolbar friends_feed_toolbar = view.findViewById(R.id.home_toolbar);
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
-                .build();
-
-        NavController navHostFragment = NavHostFragment.findNavController(this);
-        NavigationUI.setupWithNavController(friends_feed_toolbar, navHostFragment, appBarConfiguration);
-    }
 
     @Override
     public void onDestroyView() {
