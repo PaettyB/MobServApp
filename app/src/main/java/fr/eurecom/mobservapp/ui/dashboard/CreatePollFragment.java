@@ -137,17 +137,6 @@ public class CreatePollFragment extends Fragment {
         clearFields(view);
     }
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        Toolbar create_new_poll_toolbar = view.findViewById(R.id.create_new_poll_toolbar);
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
-                .build();
-        NavController navHostFragment = NavHostFragment.findNavController(this);
-        NavigationUI.setupWithNavController(create_new_poll_toolbar, navHostFragment, appBarConfiguration);
-    }
 
     @Override
     public void onDestroyView() {
